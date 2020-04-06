@@ -26,9 +26,6 @@
 ;; Frame title
 (setq frame-title-format "%b [%m]")
 
-;; Line and column number
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
-
 ;; Directory
 (defconst history-dir (concat user-emacs-directory "history/"))
 (defconst etc-dir (concat user-emacs-directory "etc/"))
@@ -113,11 +110,27 @@
         confirm-kill-emacs #'y-or-n-p
         ))
 
-;;vc-hooks.el
-;; vc-follow-symlinks t
+;; Display line number
+(use-feature display-line-numbers
+  :hook
+  (prog-mode . display-line-numbers-mode))
+
+;; Highlight line
+(use-feature hl-line
+  :hook
+  (prog-mode . hl-line-mode))
+
+;; Selection
+(use-feature delsel
+  :init
+  (delete-selection-mode +1))
 
 ;; simple.el
-;; (column-number-mode 1)
+(use-feature simple
+  :init
+  (setq shift-select-mode nil
+        column-number-mode 1))
 
 
-
+;;vc-hooks.el
+;; vc-follow-symlinks t
