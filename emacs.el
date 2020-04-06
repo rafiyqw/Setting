@@ -1,6 +1,6 @@
 ;; emacs.el --- Emacs configuration file -*- lexical-binding: t -*-
 
-; Optimization
+;;; Optimization
 ;; built-in emacs package manager
 (setq package-enable-at-startup nil)
 
@@ -22,7 +22,7 @@
 (setq use-file-dialog nil)
 
 
-; Setting
+;;; Setting
 ;; Frame title
 (setq frame-title-format "%b [%m]")
 
@@ -43,7 +43,7 @@
       ring-bell-function #'ignore
       visible-bell t)
 
-(fset #'yes-or-no-p #'y-or-n-p))
+(fset #'yes-or-no-p #'y-or-n-p)
 
 ;; Scrolling
 (setq hscroll-margin 2
@@ -58,6 +58,41 @@
   (set-charset-priority 'unicode))
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
+
+;;; Package manager
+;; Detect package modifications
+(if (and (executable-find "watchexec")
+         (executable-find "python3"))
+    (setq straight-check-for-modifications '(watch-files find-when-checking))
+  (setq straight-check-for-modifications
+        '(find-at-startup find-when-checking)))
+
+;; Bootstrap straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; use-package
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+(setq use-package-always-defer t)
+
+;; local package
+(defmacro use-feature (name &rest args)
+  (declare (indent defun))
+  '(use-package ,name
+     :straight nil
+     ,@args))
 
 ;; files.el
 ;; find-file-visit-truename t
