@@ -90,14 +90,28 @@
 ;; local package
 (defmacro use-feature (name &rest args)
   (declare (indent defun))
-  '(use-package ,name
+  `(use-package ,name
      :straight nil
      ,@args))
 
-;; files.el
-;; find-file-visit-truename t
-;; find-file-suppress-same-file-warnings t
-;; confirm-kill-emacs #'y-or-n-p
+;;; Built-in packages
+;; org-mode
+(use-feature org
+  :defer 5)
+
+;;; Backup files
+(use-feature files
+  :init
+  (setq auto-save-list-file-name (concat history-dir "autosave")
+        backup-directory-alist '(("." . ,(concat history-dir "backup/")))
+        make-backup-files nil
+        backup-by-copying t
+        create-lockfiles nil
+        auto-save-default nil
+        find-file-visit-truename t
+        find-file-suppress-same-file-warnings t
+        confirm-kill-emacs #'y-or-n-p
+        ))
 
 ;;vc-hooks.el
 ;; vc-follow-symlinks t
