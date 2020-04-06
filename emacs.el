@@ -131,6 +131,45 @@
   (setq shift-select-mode nil
         column-number-mode 1))
 
+;; Custom edit
+(use-feature cus-edit
+  :defer 5
+  :config
+  (setq custom-file (concat etc-dir "custom.el")))
 
+;; Advanced command
+(use-feature novice
+  :init
+  (setq disabled-command-function nil))
+
+;; History
+(use-feature recentf
+  :init
+  (setq recentf-save-file (concat history-dir "recentf")
+        recentf-auto-cleanup 'never)
+  :config
+  (recentf-mode 1))
+
+(use-feature savehist
+  :defer 1
+  :config
+  (setq savehist-file (concat history-dir "savehist")
+        savehist-save-minibuffer-history t
+        savehist-autosave-interval nil
+        savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+  (savehist-mode 1))
+
+(use-feature saveplace
+  :defer 1
+  :config
+  (setq save-place-file (concat history-dir "saveplace"))
+  (save-place-mode 1))
+
+(use-feature desktop
+  :defer 1
+  :config
+  (setq desktop-dirname (concat etc-dir "desktop")
+        desktop-base-file-name "autosave"
+        desktop-base-lock-name "autosave-lock"))
 ;;vc-hooks.el
 ;; vc-follow-symlinks t
