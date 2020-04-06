@@ -171,5 +171,75 @@
   (setq desktop-dirname (concat etc-dir "desktop")
         desktop-base-file-name "autosave"
         desktop-base-lock-name "autosave-lock"))
+
+;;; Dired
+(use-feature dired
+  :defer 2
+  :config
+  (setq dired-auto-revert-buffer t
+        dired-recursive-copies 'always
+        dired-recursive-deletes 'top
+        delete-by-moving-to-trash t
+        dired-dwim-target t)
+  :hook
+  ((dired-mode . dired-hide-details-mode)
+   (dired-mode . hl-line-mode)))
+
+;;; Ibuffer
+(use-feature ibuffer
+  :defer 2
+  :config
+  (setq ibuffer-expert t
+        ibuffer-use-other-window nil
+        ibuffer-show-empty-filter-groups nil
+        ibuffer-saved-filter-groups
+        '(("Main"
+           ("Directories" (mode . dired-mode))
+           ("Org" (mode . org-mode))
+           ("Programming" (mode . prog-mode))
+           ("Markdown" (mode . markdown-mode))
+           ("Magit" (or
+                    (mode . magit-blame-mode)
+                    (mode . magit-cherry-mode)
+                    (mode . magit-diff-mode)
+                    (mode . magit-log-mode)
+                    (mode . magit-process-mode)
+                    (mode . magit-status-mode)))
+           ("Emacs" (or
+                    (name . "^\\*Help\\*$")
+                    (name . "^\\*Custom.*")
+                    (name . "^\\*Org Agenda\\*$")
+                    (name . "^\\*info\\*$")
+                    (name . "^\\*scratch\\*$")
+                    (name . "^\\*Backtrace\\*$")
+                    (name . "^\\*Completions\\*$")
+                    (name . "^\\*straight-process\\*$")
+                    (name . "^\\*Messages\\*$"))))))
+  :hook
+  (ibuffer-mode . hl-line-mode)
+  (ibuffer-mode . (lambda ()
+                    (ibuffer-switch-to-saved-filter-groups "Main")))
+  :bind
+  (([remap list-buffers] . #'ibuffer)))
+
+;; Hippie expand
+(use-feature hippie-exp
+  :defer 2
+  :config
+  (setq hippie-expand-try-functions-list
+        '(
+          try-expand-dabbrev
+          try-expand-dabbrev-all-buffers
+          ;; try-expand-dabbrev-from-kill
+          try-complete-lisp-symbol-partially
+          try-complete-lisp-symbol
+          try-complete-file-name-partially
+          try-complete-file-name
+          ;; try-expand-all-abbrevs
+          ;; try-expand-list
+          ;; try-expand-line
+          ))
+  :bind
+  ("M-/" . hippie-expand))
 ;;vc-hooks.el
 ;; vc-follow-symlinks t
