@@ -22,4 +22,36 @@
 (setq use-file-dialog nil)
 
 
+; Setting
+;; Frame title
+(setq frame-title-format "%b [%m]")
 
+;; Line and column number
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
+;; Directory
+(defconst history-dir (concat user-emacs-directory "history/"))
+(defconst etc-dir (concat user-emacs-directory "etc/"))
+(defconst lisp-dir (concat user-emacs-directory "lisp/"))
+
+;; Indentation
+(setq-default indent-tabs-mode nil
+              tab-width 4)
+
+;; Feedback
+(setq echo-keystrokes 1e-6
+      ring-bell-function #'ignore
+      visible-bell t)
+
+(fset #'yes-or-no-p #'y-or-n-p))
+
+;; files.el
+;; find-file-visit-truename t
+;; find-file-suppress-same-file-warnings t
+;; confirm-kill-emacs #'y-or-n-p
+
+;;vc-hooks.el
+;; vc-follow-symlinks t
+
+;; simple.el
+;; (column-number-mode 1)
