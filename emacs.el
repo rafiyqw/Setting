@@ -45,6 +45,20 @@
 
 (fset #'yes-or-no-p #'y-or-n-p))
 
+;; Scrolling
+(setq hscroll-margin 2
+      hscroll-step 1
+      scroll-conservatively 101
+      scroll-margin 0
+      scroll-preserve-screen-position t
+      auto-window-vscroll nil)
+
+;; utf-8
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+
 ;; files.el
 ;; find-file-visit-truename t
 ;; find-file-suppress-same-file-warnings t
@@ -55,3 +69,6 @@
 
 ;; simple.el
 ;; (column-number-mode 1)
+
+
+
