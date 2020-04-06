@@ -14,10 +14,12 @@
 
 ;; Graphical elements 
 (when (display-graphic-p)
-;;  (when (fboundp 'scroll-bar-mode)
-;;    (scroll-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
   (tool-bar-mode -1))
 
 ;; Dialog box
-;;(setq use-file-dialog nil
-;;      use-dialog-box nil)
+(setq use-file-dialog nil)
+
+
+
