@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ln -s ~/Setting/emacs.el ~/.emacs.d/init.el
+ln -s /home/$USER/Setting/emacs.el /home/$USER/.emacs.d/init.el
