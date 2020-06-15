@@ -1,9 +1,12 @@
 # Z shell configuration file.
 
 # History
-HISTFILE=~/.cache/zsh/history
+HISTFILE=/home/$USER/.cache/zsh_history
 HISTSIZE=500
 SAVEHIST=1000
+setopt SHARE_HISTORY                # share history across multiple zsh sessions
+setopt APPEND_HISTORY               # append to history
+setopt INC_APPEND_HISTORY           # adds commands as they are typed
 setopt HIST_EXPIRE_DUPS_FIRST       # expire duplicates first
 setopt HIST_IGNORE_DUPS             # do not store duplications
 setopt HIST_FIND_NO_DUPS            # ignore duplicates when searching
