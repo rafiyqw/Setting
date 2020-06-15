@@ -1,3 +1,6 @@
+# reload config file
+bind r source-file ~/.tmux.conf \; display ".tmux.conf reloaded!"
+
 # improve colors
 set -g default-terminal 'screen-256color'
 
@@ -9,6 +12,16 @@ set -g base-index 1
 setw -g pane-base-index 1
 
 # status bar
-# set -g status-position bottom
 set -g status-bg colour234
 set -g status-fg colour205
+
+set -g status-left ''
+setw -g window-status-current-format ' #I#[fg=colour250]:#[fg=colour255]#W#[fg=colour50]#F '
+setw -g window-status-format ' #I#[fg=colour236]:#[fg=colour250]#W#[fg=colour244]#F '
+
+set -g status-right '#[fg=colour233,bg=colour241,bold] %a/%d/%m #[fg=colour233,bg=colour245,bold] %I:%M:%p '
+
+
+#set -g status-right-length 50
+#set -g status-left-length 20
+#setw -g mode-keys vi
