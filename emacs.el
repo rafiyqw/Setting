@@ -26,6 +26,10 @@
 ;; Frame title
 (setq frame-title-format "%b [%m]")
 
+;; Frame resize behaviour
+(setq window-resize-pixelwise t
+      frame-resize-pixelwise t)
+
 ;; Directory
 (defconst history-dir (concat user-emacs-directory "history/"))
 (defconst etc-dir (concat user-emacs-directory "etc/"))
@@ -109,6 +113,11 @@
         find-file-suppress-same-file-warnings t
         confirm-kill-emacs #'y-or-n-p
         ))
+
+;; Prefer vertical split
+(use-feature window
+  :init
+  (setq split-height-threshold nil))
 
 ;; Display line number
 (use-feature display-line-numbers
@@ -243,6 +252,8 @@
   ("M-/" . hippie-expand))
 ;;vc-hooks.el
 ;; vc-follow-symlinks t
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
 ;;; External packages
 ;; Ledger
