@@ -252,10 +252,36 @@
   ("M-/" . hippie-expand))
 ;;vc-hooks.el
 ;; vc-follow-symlinks t
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
 ;;; External packages
+;; Solarized themes
+(use-package emacs-color-theme-solarized
+  :straight (:host github :repo "sellout/emacs-color-theme-solarized")
+  :init
+  (setq solarized-termcolor 256
+        solarized-broken-srgb t
+        solarized-contrast 'normal)
+
+  (defun solarized-light ()
+      (load-theme 'solarized t)
+      (set-frame-parameter nil 'background-mode 'light)
+      (enable-theme 'solarized))
+
+  (defun solarized-dark ()
+      (load-theme 'solarized t)
+      (set-frame-parameter nil 'background-mode 'dark)
+      (enable-theme 'solarized))
+
+  (defun solarized-switch ()
+      (interactive)
+      (if (string= (frame-parameter nil 'background-mode) 'light)
+          (solarized-dark)
+        (solarized-light)))
+
+  (solarized-light)
+  :bind
+  ("<f6>" . #'solarized-switch))
+
 ;; Ledger
 (use-package ledger-mode
   :defer 5
