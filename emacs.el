@@ -315,6 +315,9 @@
 (use-package transient
   :after with-editor
   :config
+  (setq transient-levels-file  (concat etc-dir "transient/levels")
+        transient-values-file  (concat etc-dir "transient/values")
+        transient-history-file (concat etc-dir "transient/history"))
   (transient-bind-q-to-quit))
 
 (use-package magit
