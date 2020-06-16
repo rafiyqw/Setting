@@ -11,6 +11,7 @@
 (setq inhibit-startup-screen t
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode)
+(fset #'display-startup-echo-area-message #'ignore)
 
 ;; Graphical elements 
 (when (display-graphic-p)
