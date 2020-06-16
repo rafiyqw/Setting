@@ -62,8 +62,6 @@
 (setq locale-coding-system 'utf-8)
 
 ;; Font
-(add-to-list 'default-frame-alist '(width  . 90))
-(add-to-list 'default-frame-alist '(height . 40))
 (add-to-list 'default-frame-alist '(font . "Cascadia Code-10"))
 
 ;;; Package manager
@@ -117,6 +115,7 @@
         auto-save-default nil
         find-file-visit-truename t
         find-file-suppress-same-file-warnings t
+        revert-without-query '(".*")
         confirm-kill-emacs #'y-or-n-p
         ))
 
@@ -203,6 +202,7 @@
         dired-recursive-copies 'always
         dired-recursive-deletes 'top
         delete-by-moving-to-trash t
+        dired-listing-switches "-Alh"
         dired-dwim-target t)
   :hook
   ((dired-mode . dired-hide-details-mode)
