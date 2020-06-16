@@ -257,6 +257,15 @@
           ))
   :bind
   ("M-/" . hippie-expand))
+
+;; Matching Paranthesis
+(use-feature paren
+  :init
+  (setq show-paren-when-point-in-periphery t
+        show-paren-when-point-inside-paren t
+        blink-matching-paren nil)
+  (show-paren-mode 1))
+
 ;; Emacs vc
 (use-feature vc-hooks
   :config
