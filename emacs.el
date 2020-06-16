@@ -187,7 +187,15 @@
         desktop-base-file-name "autosave"
         desktop-base-lock-name "autosave-lock"))
 
-;;; Dired
+;; Autorevert
+(use-feature autorevert
+  :defer 2
+  :config
+;;  (setq auto-revert-interval 1)
+  (global-auto-revert-mode +1)
+  (setq global-auto-revert-non-file-buffers t))
+
+;; Dired
 (use-feature dired
   :defer 2
   :config
