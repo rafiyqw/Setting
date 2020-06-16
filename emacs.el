@@ -60,6 +60,11 @@
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
 
+;; Font
+(add-to-list 'default-frame-alist '(width  . 90))
+(add-to-list 'default-frame-alist '(height . 40))
+(add-to-list 'default-frame-alist '(font . "Cascadia Code-10"))
+
 ;;; Package manager
 ;; Detect package modifications
 (if (and (executable-find "watchexec")
@@ -250,7 +255,10 @@
           ))
   :bind
   ("M-/" . hippie-expand))
-;;vc-hooks.el
+;; Emacs vc
+(use-feature vc-hooks
+  :config
+  (setq vc-handled-backends nil))
 ;; vc-follow-symlinks t
 
 ;;; External packages
@@ -288,3 +296,18 @@
   :mode
   ("\\.dat\\'"
    "\\.ledger\\'"))
+
+;; magit
+(use-package with-editor
+  :defer 5)
+
+(use-package transient
+  :after with-editor
+  :config
+  (transient-bind-q-to-quit))
+
+(use-package magit
+  :bind
+  ("C-x g" . #'magit-status)
+  ("C-x M-g" . #'magit-dispatch)
+  ("C-c M-g" . #'magit-file-dispatch))
