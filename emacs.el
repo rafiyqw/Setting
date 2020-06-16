@@ -11,7 +11,7 @@
 (setq inhibit-startup-screen t
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode)
-(fset #'display-startup-echo-area-message #'ignore)
+;(fset #'display-startup-echo-area-message #'ignore)
 
 ;; Graphical elements 
 (when (display-graphic-p)
@@ -54,6 +54,13 @@
       scroll-margin 0
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
+
+;; Mouse wheel
+(use-feature mwheel
+  :init
+  (setq mouse-wheel-scroll-amount
+        '(1 ((shift) . 5) ((control)))
+        ))
 
 ;; utf-8
 (when (fboundp 'set-charset-priority)
@@ -108,7 +115,7 @@
 (use-feature files
   :init
   (setq auto-save-list-file-name (concat history-dir "autosave")
-        backup-directory-alist '(("." . ,(concat history-dir "backup/")))
+        backup-directory-alist `(("." . ,(concat history-dir "backup/")))
         make-backup-files nil
         backup-by-copying t
         create-lockfiles nil
@@ -126,8 +133,21 @@
 
 ;; Display line number
 (use-feature display-line-numbers
+  :config
+  (defun cicle-line-numbers-mode ()
+  "Cicle between line numbers mode or don't display line number."
+  (interactive)
+  (if (bound-and-true-p display-line-numbers-mode)
+    (if (string= display-line-numbers-type 'visual)
+        (display-line-numbers-mode -1)
+      (setq display-line-numbers-type 'visual)
+      (display-line-numbers-mode))
+  (setq display-line-numbers-type t)
+  (display-line-numbers-mode)))
   :hook
-  (prog-mode . display-line-numbers-mode))
+  (prog-mode . display-line-numbers-mode)
+  :bind
+  ("<f8>" . #'cicle-line-numbers-mode))
 
 ;; Highlight line
 (use-feature hl-line
