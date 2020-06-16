@@ -213,6 +213,7 @@
            ("Org" (mode . org-mode))
            ("Programming" (mode . prog-mode))
            ("Markdown" (mode . markdown-mode))
+           ("Ledger" (mode. ledger-mode))
            ("Magit" (or
                     (mode . magit-blame-mode)
                     (mode . magit-cherry-mode)
