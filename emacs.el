@@ -254,20 +254,19 @@
 
 
 ;; FEATURES
-
 ;; org-mode
 (use-feature org
-  :defer 5)
+  :commands org-mode)
 
 ;; dired
 (use-feature dired
-  :defer 3
+  :commands dired-mode
   :config
   (setq dired-auto-revert-buffer t)
   (setq dired-recursive-copies 'always)
   (setq dired-recursive-deletes 'top)
   (setq delete-by-moving-to-trash t)
-  (setq dired-listing-switches "-Alh")
+  (setq dired-listing-switches "-AlFhv --color=always --group-directories-first")
   (setq dired-dwim-target t)
   :hook
   ((dired-mode . dired-hide-details-mode)
