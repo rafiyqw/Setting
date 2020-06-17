@@ -8,10 +8,10 @@
 ;; inhibit resize frame
 (setq frame-inhibit-implied-resize t)
 
-;; Startup screen
-(setq inhibit-startup-screen t
-      initial-scratch-message nil
-      initial-major-mode 'fundamental-mode)
+;; startup screen
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message nil)
+(setq initial-major-mode 'fundamental-mode)
 ;(fset #'display-startup-echo-area-message #'ignore)
 
 ;; Graphical elements 
@@ -21,34 +21,21 @@
   (tool-bar-mode -1))
 (menu-bar-mode -1)
 
-;; Frame title
+;; frame title
 (setq frame-title-format "%b [%m]")
 
-;; Dialog box
+;; disable dialog box
 (setq use-file-dialog nil)
 
-;; Frame resize behaviour
-(setq window-resize-pixelwise t
-      frame-resize-pixelwise t)
-
-;; Directory
-(defconst history-dir (concat user-emacs-directory "history/"))
-(defconst etc-dir (concat user-emacs-directory "etc/"))
-(defconst lisp-dir (concat user-emacs-directory "lisp/"))
-
-;; Indentation
-(setq-default indent-tabs-mode nil
-              tab-width 4)
+;; frame resize behaviour
+(setq window-resize-pixelwise t)
+(setq frame-resize-pixelwise t)
 
 ;; Feedback
 (setq echo-keystrokes 1e-6
       ring-bell-function #'ignore
       visible-bell t)
-
 (fset #'yes-or-no-p #'y-or-n-p)
-
-;; Preserve contents of system clipboard
-(setq save-interprogram-paste-before-kill t)
 
 ;; Scrolling
 (setq hscroll-margin 2
@@ -58,19 +45,36 @@
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
 
-;; utf-8
-(when (fboundp 'set-charset-priority)
-  (set-charset-priority 'unicode))
-(prefer-coding-system 'utf-8)
-(setq locale-coding-system 'utf-8)
-
 ;; Font
 (add-to-list 'default-frame-alist '(font . "Cascadia Code-10"))
 
 ;; Line number format
 (setq display-line-numbers-widen t)
 
-;;; Package manager
+
+;;; File and Backup
+;; directory
+(defconst history-dir (concat user-emacs-directory "history/"))
+(defconst etc-dir (concat user-emacs-directory "etc/"))
+(defconst lisp-dir (concat user-emacs-directory "lisp/"))
+
+
+;;; Editing
+;; indentation
+(setq-default indent-tabs-mode nil
+              tab-width 4)
+
+;; Preserve contents of system clipboard
+(setq save-interprogram-paste-before-kill t)
+
+;; utf-8
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+
+
+;;; Package Manager
 ;; Detect package modifications
 (if (and (executable-find "watchexec")
          (executable-find "python3"))
@@ -104,6 +108,7 @@
   `(use-package ,name
      :straight nil
      ,@args))
+
 
 ;;; Built-in packages
 ;; org-mode
