@@ -110,13 +110,17 @@
 
 ;;; Backup files
 (use-feature files
-  :init
+  :defer 1
+  :config
   (setq auto-save-list-file-name (concat history-dir "autosave")
         backup-directory-alist `(("." . ,(concat history-dir "backup/")))
-        make-backup-files nil
+        ;;make-backup-files nil
         backup-by-copying t
+        version-control t
+        delete-old-versions t
+        kept-new-versions 6
         create-lockfiles nil
-        auto-save-default nil
+        ;;auto-save-default nil
         find-file-visit-truename t
         find-file-suppress-same-file-warnings t
         revert-without-query '(".*")
