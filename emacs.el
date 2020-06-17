@@ -185,7 +185,6 @@
   :bind
   ("<f5>" . cicle-line-numbers-mode))
 
-
 ;; Highlight line
 (use-feature hl-line
   :hook
@@ -201,6 +200,11 @@
   :init
   (setq shift-select-mode nil
         column-number-mode 1))
+
+;; subword
+(use-feature subword
+  :hook
+  (prog-mode-hook . subword-mode))
 
 ;; Custom edit
 (use-feature cus-edit
