@@ -19,14 +19,13 @@
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
   (tool-bar-mode -1))
+(menu-bar-mode -1)
+
+;; Frame title
+(setq frame-title-format "%b [%m]")
 
 ;; Dialog box
 (setq use-file-dialog nil)
-
-
-;;; Setting
-;; Frame title
-(setq frame-title-format "%b [%m]")
 
 ;; Frame resize behaviour
 (setq window-resize-pixelwise t
