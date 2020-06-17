@@ -55,13 +55,6 @@
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
 
-;; Mouse wheel
-(use-feature mwheel
-  :init
-  (setq mouse-wheel-scroll-amount
-        '(1 ((shift) . 5) ((control)))
-        ))
-
 ;; utf-8
 (when (fboundp 'set-charset-priority)
   (set-charset-priority 'unicode))
@@ -70,6 +63,9 @@
 
 ;; Font
 (add-to-list 'default-frame-alist '(font . "Cascadia Code-10"))
+
+;; Line number format
+(setq display-line-numbers-widen t)
 
 ;;; Package manager
 ;; Detect package modifications
@@ -126,56 +122,6 @@
         confirm-kill-emacs #'y-or-n-p
         ))
 
-;; Prefer vertical split
-(use-feature window
-  :init
-  (setq split-height-threshold nil))
-
-;; Display line number
-(use-feature display-line-numbers
-  :config
-  (defun cicle-line-numbers-mode ()
-  "Cicle between line numbers mode or don't display line number."
-  (interactive)
-  (if (bound-and-true-p display-line-numbers-mode)
-    (if (string= display-line-numbers-type 'visual)
-        (display-line-numbers-mode -1)
-      (setq display-line-numbers-type 'visual)
-      (display-line-numbers-mode))
-  (setq display-line-numbers-type t)
-  (display-line-numbers-mode)))
-  :hook
-  (prog-mode . display-line-numbers-mode)
-  :bind
-  ("<f8>" . #'cicle-line-numbers-mode))
-
-;; Highlight line
-(use-feature hl-line
-  :hook
-  (prog-mode . hl-line-mode))
-
-;; Selection
-(use-feature delsel
-  :init
-  (delete-selection-mode +1))
-
-;; simple.el
-(use-feature simple
-  :init
-  (setq shift-select-mode nil
-        column-number-mode 1))
-
-;; Custom edit
-(use-feature cus-edit
-  :defer 5
-  :config
-  (setq custom-file (concat etc-dir "custom.el")))
-
-;; Advanced command
-(use-feature novice
-  :init
-  (setq disabled-command-function nil))
-
 ;; History
 (use-feature recentf
   :init
@@ -205,6 +151,67 @@
   (setq desktop-dirname (concat etc-dir "desktop")
         desktop-base-file-name "autosave"
         desktop-base-lock-name "autosave-lock"))
+
+;; Mouse wheel
+(use-feature mwheel
+  :init
+  (setq mouse-wheel-scroll-amount
+        '(1 ((shift) . 5) ((control)))
+        ))
+
+;; Prefer vertical split
+(use-feature window
+  :init
+  (setq split-height-threshold nil))
+
+;; Display line number
+(use-feature display-line-numbers
+  :init
+  (setq display-line-numbers-grow-only t
+        )
+  :config
+  (defun cicle-line-numbers-mode ()
+  "Cicle between line numbers mode or don't display line number."
+  (interactive)
+  (if (bound-and-true-p display-line-numbers-mode)
+    (if (string= display-line-numbers-type 'visual)
+        (display-line-numbers-mode -1)
+      (and (setq-local display-line-numbers-type 'visual)
+           (display-line-numbers-mode)))
+    (and (setq-local display-line-numbers-type t)
+         (display-line-numbers-mode))))
+  :hook
+  (prog-mode . display-line-numbers-mode)
+  :bind
+  ("<f5>" . cicle-line-numbers-mode))
+
+
+;; Highlight line
+(use-feature hl-line
+  :hook
+  (prog-mode . hl-line-mode))
+
+;; Selection
+(use-feature delsel
+  :init
+  (delete-selection-mode +1))
+
+;; simple.el
+(use-feature simple
+  :init
+  (setq shift-select-mode nil
+        column-number-mode 1))
+
+;; Custom edit
+(use-feature cus-edit
+  :defer 5
+  :config
+  (setq custom-file (concat etc-dir "custom.el")))
+
+;; Advanced command
+(use-feature novice
+  :init
+  (setq disabled-command-function nil))
 
 ;; Autorevert
 (use-feature autorevert
