@@ -48,10 +48,13 @@
 
 (fset #'yes-or-no-p #'y-or-n-p)
 
+;; Preserve contents of system clipboard
+(setq save-interprogram-paste-before-kill t)
+
 ;; Scrolling
 (setq hscroll-margin 2
       hscroll-step 1
-      scroll-conservatively 101
+      scroll-conservatively 1
       scroll-margin 0
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
