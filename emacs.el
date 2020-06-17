@@ -1,10 +1,11 @@
 ;; emacs.el --- Emacs configuration file -*- lexical-binding: t -*-
 
+;; SETTING
 ;;; Optimization
-;; built-in emacs package manager
+;; disable built-in emacs package manager
 (setq package-enable-at-startup nil)
 
-;; Resize frame
+;; inhibit resize frame
 (setq frame-inhibit-implied-resize t)
 
 ;; Startup screen
@@ -124,10 +125,10 @@
 
 ;; History
 (use-feature recentf
-  :init
+  :defer 1
+  :config
   (setq recentf-save-file (concat history-dir "recentf")
         recentf-auto-cleanup 'never)
-  :config
   (recentf-mode 1))
 
 (use-feature savehist
@@ -167,10 +168,9 @@
 ;; Display line number
 (use-feature display-line-numbers
   :init
-  (setq display-line-numbers-grow-only t
-        )
+  (setq display-line-numbers-grow-only t)
   :config
-  (defun cicle-line-numbers-mode ()
+  (defun func/cicle-line-numbers-mode ()
   "Cicle between line numbers mode or don't display line number."
   (interactive)
   (if (bound-and-true-p display-line-numbers-mode)
@@ -183,7 +183,7 @@
   :hook
   (prog-mode . display-line-numbers-mode)
   :bind
-  ("<f5>" . cicle-line-numbers-mode))
+  ("<f5>" . func/cicle-line-numbers-mode))
 
 ;; Highlight line
 (use-feature hl-line
@@ -221,9 +221,9 @@
 (use-feature autorevert
   :defer 2
   :config
-;;  (setq auto-revert-interval 1)
-  (global-auto-revert-mode +1)
-  (setq global-auto-revert-non-file-buffers t))
+  (setq auto-revert-verbose t
+        global-auto-revert-non-file-buffers t)
+  (global-auto-revert-mode 1))
 
 ;; Dired
 (use-feature dired
