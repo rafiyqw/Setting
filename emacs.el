@@ -121,8 +121,7 @@
 
 ;; Prefer vertical split
 (use-feature window
-  :defer 1
-  :config
+  :init
   (setq split-height-threshold nil))
 
 ;; Display line number
@@ -197,7 +196,7 @@
 
 ;; Custom edit
 (use-feature cus-edit
-  :defer 5
+  :defer 3
   :config
   (setq custom-file (concat etc-dir "custom.el")))
 
@@ -274,7 +273,7 @@
 
 ;;; ibuffer
 (use-feature ibuffer
-  :defer 3
+  :commands ibuffer
   :config
   (setq ibuffer-expert t)
   (setq ibuffer-use-other-window nil)
@@ -312,7 +311,7 @@
 
 ;; hippie-expand
 (use-feature hippie-exp
-  :defer 2
+  :commands hippie-expand
   :config
   (setq hippie-expand-try-functions-list
         '(
@@ -329,7 +328,6 @@
           ))
   :bind
   ("M-/" . hippie-expand))
-
 
 
 ;;; External packages
@@ -362,7 +360,7 @@
 
 ;; Ledger
 (use-package ledger-mode
-  :defer 5
+  :commands ledger-mode
   :mode
   ("\\.dat\\'"
    "\\.ledger\\'"))
