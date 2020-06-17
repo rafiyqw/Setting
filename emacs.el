@@ -12,7 +12,7 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 (setq initial-major-mode 'fundamental-mode)
-;(fset #'display-startup-echo-area-message #'ignore)
+(fset #'display-startup-echo-area-message #'ignore)
 
 ;; Graphical elements 
 (when (display-graphic-p)
@@ -32,18 +32,18 @@
 (setq frame-resize-pixelwise t)
 
 ;; Feedback
-(setq echo-keystrokes 1e-6
-      ring-bell-function #'ignore
-      visible-bell t)
+(setq echo-keystrokes 1e-6)
+(setq ring-bell-function #'ignore)
+(setq visible-bell t)
 (fset #'yes-or-no-p #'y-or-n-p)
 
 ;; Scrolling
-(setq hscroll-margin 2
-      hscroll-step 1
-      scroll-conservatively 1
-      scroll-margin 0
-      scroll-preserve-screen-position t
-      auto-window-vscroll nil)
+(setq hscroll-margin 2)
+(setq hscroll-step 1)
+(setq scroll-conservatively 1)
+(setq scroll-margin 0)
+(setq scroll-preserve-screen-position t)
+(setq auto-window-vscroll nil)
 
 ;; Font
 (add-to-list 'default-frame-alist '(font . "Cascadia Code-10"))
@@ -61,8 +61,8 @@
 
 ;;; Editing
 ;; indentation
-(setq-default indent-tabs-mode nil
-              tab-width 4)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 ;; Preserve contents of system clipboard
 (setq save-interprogram-paste-before-kill t)
@@ -74,7 +74,8 @@
 (setq locale-coding-system 'utf-8)
 
 
-;;; Package Manager
+;; PACKAGE MANAGER
+;;; straight.el
 ;; Detect package modifications
 (if (and (executable-find "watchexec")
          (executable-find "python3"))
@@ -110,70 +111,18 @@
      ,@args))
 
 
-;;; Built-in packages
-;; org-mode
-(use-feature org
-  :defer 5)
-
-;;; Backup files
-(use-feature files
-  :defer 1
-  :config
-  (setq auto-save-list-file-name (concat history-dir "autosave")
-        backup-directory-alist `(("." . ,(concat history-dir "backup/")))
-        ;;make-backup-files nil
-        backup-by-copying t
-        version-control t
-        delete-old-versions t
-        kept-new-versions 6
-        create-lockfiles nil
-        ;;auto-save-default nil
-        find-file-visit-truename t
-        find-file-suppress-same-file-warnings t
-        revert-without-query '(".*")
-        confirm-kill-emacs #'y-or-n-p
-        ))
-
-;; History
-(use-feature recentf
-  :defer 1
-  :config
-  (setq recentf-save-file (concat history-dir "recentf")
-        recentf-auto-cleanup 'never)
-  (recentf-mode 1))
-
-(use-feature savehist
-  :defer 1
-  :config
-  (setq savehist-file (concat history-dir "savehist")
-        savehist-save-minibuffer-history t
-        savehist-autosave-interval nil
-        savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-  (savehist-mode 1))
-
-(use-feature saveplace
-  :defer 1
-  :config
-  (setq save-place-file (concat history-dir "saveplace"))
-  (save-place-mode 1))
-
-(use-feature desktop
-  :defer 1
-  :config
-  (setq desktop-dirname (concat etc-dir "desktop")
-        desktop-base-file-name "autosave"
-        desktop-base-lock-name "autosave-lock"))
-
+;;; Built-in Packages
+;; OPTIMIZATIONS
 ;; Mouse wheel
 (use-feature mwheel
   :init
   (setq mouse-wheel-scroll-amount
-        '(1 ((shift) . 5) ((control)))
-        ))
+        '(1 ((shift) . 5) ((control)))))
 
 ;; Prefer vertical split
 (use-feature window
-  :init
+  :defer 1
+  :config
   (setq split-height-threshold nil))
 
 ;; Display line number
@@ -196,10 +145,91 @@
   :bind
   ("<f5>" . func/cicle-line-numbers-mode))
 
+
+;; FILES
+;; Backup files
+(use-feature files
+  :defer 2
+  :config
+  (setq auto-save-list-file-name (concat history-dir "autosave"))
+  (setq backup-directory-alist `(("." . ,(concat history-dir "backup/"))))
+  ;(setq make-backup-files nil)
+  (setq backup-by-copying t)
+  (setq version-control t)
+  (setq delete-old-versions t)
+  (setq kept-new-versions 6)
+  (setq create-lockfiles nil)
+  ;(setq auto-save-default nil)
+  (setq find-file-visit-truename t)
+  (setq find-file-suppress-same-file-warnings t)
+  (setq revert-without-query '(".*"))
+  (setq confirm-kill-emacs #'y-or-n-p))
+
+;; History
+(use-feature recentf
+  :defer 2
+  :config
+  (setq recentf-save-file (concat history-dir "recentf"))
+  (setq recentf-auto-cleanup 'never)
+  (recentf-mode 1))
+
+(use-feature savehist
+  :defer 2
+  :config
+  (setq savehist-file (concat history-dir "savehist"))
+  (setq savehist-save-minibuffer-history t)
+  (setq savehist-autosave-interval nil)
+  (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+  (savehist-mode 1))
+
+(use-feature saveplace
+  :defer 2
+  :config
+  (setq save-place-file (concat history-dir "saveplace"))
+  (save-place-mode 1))
+
+(use-feature desktop
+  :defer 2
+  :config
+  (setq desktop-dirname (concat etc-dir "desktop"))
+  (setq desktop-base-file-name "autosave")
+  (setq desktop-base-lock-name "autosave-lock"))
+
+;; Custom edit
+(use-feature cus-edit
+  :defer 5
+  :config
+  (setq custom-file (concat etc-dir "custom.el")))
+
+;; Autorevert
+(use-feature autorevert
+  :defer 2
+  :config
+  (setq auto-revert-verbose t)
+  (setq global-auto-revert-non-file-buffers t)
+  (global-auto-revert-mode 1))
+
+;; Emacs vc
+(use-feature vc-hooks
+  :defer 2
+  :config
+  (setq vc-handled-backends nil)
+  (setq vc-follow-symlinks t))
+
+
+;;; Editing
 ;; Highlight line
 (use-feature hl-line
   :hook
   (prog-mode . hl-line-mode))
+
+;; Matching Paranthesis
+(use-feature paren
+  :config
+  (setq show-paren-when-point-in-periphery t)
+  (setq show-paren-when-point-inside-paren t)
+  (setq blink-matching-paren nil)
+  (show-paren-mode 1))
 
 ;; Selection
 (use-feature delsel
@@ -209,61 +239,54 @@
 ;; simple.el
 (use-feature simple
   :init
-  (setq shift-select-mode nil
-        column-number-mode 1))
+  (setq shift-select-mode nil)
+  (setq column-number-mode 1))
 
 ;; subword
 (use-feature subword
   :hook
   (prog-mode-hook . subword-mode))
 
-;; Custom edit
-(use-feature cus-edit
-  :defer 5
-  :config
-  (setq custom-file (concat etc-dir "custom.el")))
-
 ;; Advanced command
 (use-feature novice
   :init
   (setq disabled-command-function nil))
 
-;; Autorevert
-(use-feature autorevert
-  :defer 2
-  :config
-  (setq auto-revert-verbose t
-        global-auto-revert-non-file-buffers t)
-  (global-auto-revert-mode 1))
 
-;; Dired
+;; FEATURES
+
+;; org-mode
+(use-feature org
+  :defer 5)
+
+;; dired
 (use-feature dired
-  :defer 2
+  :defer 3
   :config
-  (setq dired-auto-revert-buffer t
-        dired-recursive-copies 'always
-        dired-recursive-deletes 'top
-        delete-by-moving-to-trash t
-        dired-listing-switches "-Alh"
-        dired-dwim-target t)
+  (setq dired-auto-revert-buffer t)
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'top)
+  (setq delete-by-moving-to-trash t)
+  (setq dired-listing-switches "-Alh")
+  (setq dired-dwim-target t)
   :hook
   ((dired-mode . dired-hide-details-mode)
    (dired-mode . hl-line-mode)))
 
-;;; Ibuffer
+;;; ibuffer
 (use-feature ibuffer
-  :defer 2
+  :defer 3
   :config
-  (setq ibuffer-expert t
-        ibuffer-use-other-window nil
-        ibuffer-show-empty-filter-groups nil
-        ibuffer-saved-filter-groups
+  (setq ibuffer-expert t)
+  (setq ibuffer-use-other-window nil)
+  (setq ibuffer-show-empty-filter-groups nil)
+  (setq ibuffer-saved-filter-groups
         '(("Main"
            ("Directories" (mode . dired-mode))
            ("Org" (mode . org-mode))
            ("Programming" (mode . prog-mode))
            ("Markdown" (mode . markdown-mode))
-           ("Ledger" (mode. ledger-mode))
+           ("Ledger" (mode . ledger-mode))
            ("Magit" (or
                     (mode . magit-blame-mode)
                     (mode . magit-cherry-mode)
@@ -288,7 +311,7 @@
   :bind
   (([remap list-buffers] . #'ibuffer)))
 
-;; Hippie expand
+;; hippie-expand
 (use-feature hippie-exp
   :defer 2
   :config
@@ -308,29 +331,16 @@
   :bind
   ("M-/" . hippie-expand))
 
-;; Matching Paranthesis
-(use-feature paren
-  :init
-  (setq show-paren-when-point-in-periphery t
-        show-paren-when-point-inside-paren t
-        blink-matching-paren nil)
-  (show-paren-mode 1))
 
-;; Emacs vc
-(use-feature vc-hooks
-  :config
-  (setq vc-handled-backends nil))
-;; vc-follow-symlinks t
 
 ;;; External packages
 ;; Solarized themes
 (use-package emacs-color-theme-solarized
   :straight (:host github :repo "sellout/emacs-color-theme-solarized")
   :init
-  (setq solarized-termcolor 256
-        solarized-broken-srgb t
-        solarized-contrast 'normal)
-
+  (setq solarized-termcolor 256)
+  (setq solarized-broken-srgb t)
+  (setq solarized-contrast 'normal)
   (defun solarized-light ()
       (load-theme 'solarized t)
       (set-frame-parameter nil 'background-mode 'light)
@@ -363,14 +373,15 @@
   :defer 5)
 
 (use-package transient
-  :after with-editor
+  :defer 5
   :config
-  (setq transient-levels-file  (concat etc-dir "transient/levels")
-        transient-values-file  (concat etc-dir "transient/values")
-        transient-history-file (concat etc-dir "transient/history"))
+  (setq transient-levels-file (concat etc-dir "transient/levels"))
+  (setq transient-values-file (concat etc-dir "transient/values"))
+  (setq transient-history-file (concat etc-dir "transient/history"))
   (transient-bind-q-to-quit))
 
 (use-package magit
+  :defer 5
   :bind
   ("C-x g" . #'magit-status)
   ("C-x M-g" . #'magit-dispatch)
