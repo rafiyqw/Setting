@@ -73,3 +73,16 @@
 
 ;;; Settings
 (setq frame-inhibit-implied-resize t)
+
+;;; Built-in packages
+;; startup
+(use-feature startup
+  :config
+  (setq inhibit-startup-screen t)
+  (setq initial-scratch-message nil)
+  (setq initial-major-mode 'fundamental-mode))
+
+;; scroll-bar
+(use-feature scroll-bar
+  :config
+  (scroll-bar-mode -1))
