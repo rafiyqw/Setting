@@ -331,6 +331,7 @@
 
 
 ;;; External packages
+;; OPTIMIZATION
 ;; Solarized themes
 (use-package emacs-color-theme-solarized
   :straight (:host github :repo "sellout/emacs-color-theme-solarized")
@@ -413,8 +414,8 @@
   (transient-bind-q-to-quit))
 
 (use-package magit
-  :defer 5
   :bind
   ("C-x g" . #'magit-status)
   ("C-x M-g" . #'magit-dispatch)
   ("C-c M-g" . #'magit-file-dispatch))
+
