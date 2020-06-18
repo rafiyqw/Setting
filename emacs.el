@@ -358,19 +358,54 @@
   :bind
   ("<f6>" . #'solarized-switch))
 
+;; selectrum
+(use-package selectrum
+  :defer 1
+  :init
+  (selectrum-mode +1))
+
+;; EDITING
+;; ace-jump
+(use-package ace-jump-mode
+  :bind ("C-." . ace-jump-mode))
+
+;; bookmarks
+(use-package bm
+  :init
+  (setq bm-restore-repository-on-load t)
+  :config
+  (setq bm-cycle-all-buffers t)
+  (setq bm-repository-file (concat history-dir "bm-bookmarks"))
+  (setq-default bm-buffer-persistence t)
+  :hook
+  (after-init-hook . bm-repository-load)
+  (kill-buffer-hook . bm-buffer-save)
+  (kill-emacs-hook . (lambda ()
+                       (bm-buffer-save-all)
+                       (bm-repository-save)))
+  (after-save-hook . #'bm-buffer-save)
+  (find-file-hooks . #'bm-buffer-restore)
+  (after-revert-hook . #'bm-buffer-restore)
+  (vc-before-checkin-hook . #'bm-buffer-save)
+  :bind
+  ("<f7>" . bm-next)
+  ("S-<f7>" . bm-previous)
+  ("<f8>" . bm-toggle))
+
+
+;; FEATURES
 ;; Ledger
 (use-package ledger-mode
-  :commands ledger-mode
   :mode
   ("\\.dat\\'"
    "\\.ledger\\'"))
 
 ;; magit
 (use-package with-editor
-  :defer 5)
+  :after magit)
 
 (use-package transient
-  :defer 5
+  :after magit
   :config
   (setq transient-levels-file (concat etc-dir "transient/levels"))
   (setq transient-values-file (concat etc-dir "transient/values"))
