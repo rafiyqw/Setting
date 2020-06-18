@@ -28,3 +28,48 @@
               (setq gc-cons-threshold default-gc-cons-threshold)))
 
 
+;;; Package Manager
+;; disable built-in emacs package manager
+(setq package-enable-at-startup nil)
+
+;; detect package modifications
+(cond ((memq system-type '(cygwin windows-nt ms-dos))
+       (setq straight-check-for-modifications
+	     '(check-on-save find-when-checking)))
+      ((and (executable-find "watchexec")
+	    (executable-find "python3"))
+       (setq straight-check-for-modifications
+	     '(watch-files find-when-checking)))
+      (t (setq straight-check-for-modifications
+	       '(find-at-startup find-when-checking))))
+
+;; Bootstrap straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; use-package
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+(setq use-package-always-defer t)
+
+;; local package
+(defmacro use-feature (name &rest args)
+  (declare (indent defun))
+  `(use-package ,name
+		:straight nil
+		:ensure nil
+		,@args))
+
+;;; Settings
+(setq frame-inhibit-implied-resize t)
