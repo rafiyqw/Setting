@@ -87,6 +87,7 @@
 (setq auto-window-vscroll nil)
 (setq display-line-numbers-widen t)
 (setq locale-coding-system 'utf-8)
+(setq load-prefer-newer t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (tool-bar-mode -1)
@@ -169,8 +170,8 @@
   :defer 1
   :config
   (setq show-paren-delay 0)
-  (setq show-paren-when-point-in-periphery t)
-  (setq show-paren-when-point-inside-paren t)
+ ;; (setq show-paren-when-point-in-periphery t)
+;;  (setq show-paren-when-point-inside-paren t)
   (setq blink-matching-paren nil)
   (show-paren-mode 1))
 
@@ -330,3 +331,90 @@
           ))
   :bind
   ("M-/" . hippie-expand))
+
+
+;;; Third-party Packages
+;; ace-jump
+(use-package ace-jump-mode
+  :bind ("C-." . ace-jump-mode))
+
+;; selectrum
+(use-package selectrum
+  :defer 1
+  :init
+  (selectrum-mode +1))
+
+;; bookmarks
+(use-package bm
+  :defer 1
+  :init
+  (setq bm-restore-repository-on-load t)
+  :config
+  (setq bm-cycle-all-buffers t)
+  (setq bm-repository-file (concat history-dir "bm-bookmarks"))
+  (setq-default bm-buffer-persistence t)
+  :hook
+  (after-init-hook . bm-repository-load)
+  (kill-buffer-hook . bm-buffer-save)
+  (kill-emacs-hook . (lambda ()
+                       (bm-buffer-save-all)
+                       (bm-repository-save)))
+  (after-save-hook . #'bm-buffer-save)
+  (find-file-hooks . #'bm-buffer-restore)
+  (after-revert-hook . #'bm-buffer-restore)
+  (vc-before-checkin-hook . #'bm-buffer-save)
+  :bind
+  ("<f7>" . bm-next)
+  ("S-<f7>" . bm-previous)
+  ("<f8>" . bm-toggle))
+
+;; magit
+(use-package with-editor
+  :after magit)
+
+(use-package transient
+  :after magit
+  :config
+  (setq transient-levels-file (concat etc-dir "transient/levels"))
+  (setq transient-values-file (concat etc-dir "transient/values"))
+  (setq transient-history-file (concat etc-dir "transient/history"))
+  (transient-bind-q-to-quit))
+
+(use-package magit
+  :bind
+  ("C-x g" . #'magit-status)
+  ("C-x M-g" . #'magit-dispatch)
+  ("C-c M-g" . #'magit-file-dispatch))
+
+;; Solarized themes
+(use-package emacs-color-theme-solarized
+  :straight (:host github :repo "sellout/emacs-color-theme-solarized")
+  :init
+  (setq solarized-termcolor 256)
+  (setq solarized-broken-srgb t)
+  (setq solarized-contrast 'normal)
+  (defun solarized-light ()
+      (load-theme 'solarized t)
+      (set-frame-parameter nil 'background-mode 'light)
+      (enable-theme 'solarized))
+
+  (defun solarized-dark ()
+      (load-theme 'solarized t)
+      (set-frame-parameter nil 'background-mode 'dark)
+      (enable-theme 'solarized))
+
+  (defun solarized-switch ()
+      (interactive)
+      (if (string= (frame-parameter nil 'background-mode) 'light)
+          (solarized-dark)
+        (solarized-light)))
+
+  (solarized-light)
+  :bind
+  ("<f6>" . #'solarized-switch))
+
+;; Ledger
+(use-package ledger-mode
+  :mode
+  ("\\.dat\\'"
+   "\\.ledger\\'"))
