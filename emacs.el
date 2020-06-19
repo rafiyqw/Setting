@@ -238,24 +238,32 @@
 
 ;; save places
 (use-feature saveplace
-  :defer 2
+  :defer 1
   :config
   (setq save-place-file (concat history-dir "saveplace"))
   (save-place-mode 1))
 
 ;; desktop history
 (use-feature desktop
-  :defer 2
+  :defer 1
   :config
   (setq desktop-dirname (concat etc-dir "desktop"))
   (setq desktop-base-file-name "autosave")
   (setq desktop-base-lock-name "autosave-lock"))
 
-;; Custom edit file
+;; custom edit file
 (use-feature cus-edit
-  :defer 2
+  :defer 1
   :config
   (setq custom-file (concat etc-dir "custom.el")))
+
+;; autorevert
+(use-feature autorevert
+  :defer 2
+  :config
+  (setq auto-revert-verbose t)
+  (setq global-auto-revert-non-file-buffers t)
+  (global-auto-revert-mode 1))
 
 ;; org-mode
 (use-feature org
