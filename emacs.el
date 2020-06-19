@@ -127,6 +127,12 @@
   (setq mouse-wheel-scroll-amount
         '(1 ((shift) . 5) ((control)))))
 
+;; tooltip
+(use-feature tooltip
+  :config
+  (setq tooltip-delay 0.5)
+  (setq tooltip-use-echo-area t))
+  
 ;; frame
 (use-feature frame
   :preface
