@@ -355,8 +355,15 @@
 ;; selectrum
 (use-package selectrum
   :defer 1
-  :init
-  (selectrum-mode +1))
+  :config
+  (defun func/recentf-open-files ()
+  "Use `completing-read' to open a recent file."
+  (interactive)
+  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+    (find-file (completing-read "Find recent file: " files nil t))))
+  (selectrum-mode +1)
+  :bind
+  ("C-x C-r" . func/recentf-open-files))
 
 ;; bookmarks
 (use-package bm
