@@ -199,7 +199,7 @@
 
 ;; files
 (use-feature files
-  :defer 2
+  :defer 1
   :preface
   (defconst history-dir (concat user-emacs-directory "history/"))
   (defconst etc-dir (concat user-emacs-directory "etc/"))
@@ -220,7 +220,7 @@
 
 ;; recent files
 (use-feature recentf
-  :defer 2
+  :defer 1
   :config
   (setq recentf-save-file (concat history-dir "recentf"))
   (setq recentf-auto-cleanup 'never)
@@ -228,7 +228,7 @@
 
 ;; save history
 (use-feature savehist
-  :defer 2
+  :defer 1
   :config
   (setq savehist-file (concat history-dir "savehist"))
   (setq savehist-save-minibuffer-history t)
