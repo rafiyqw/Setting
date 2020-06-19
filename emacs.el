@@ -71,18 +71,26 @@
 		:ensure nil
 		,@args))
 
+
 ;;; Settings
-(setq frame-inhibit-implied-resize t)
-
-;;; Built-in packages
-;; startup
-(use-feature startup
+(use-feature emacs
   :config
-  (setq inhibit-startup-screen t)
-  (setq initial-scratch-message nil)
-  (setq initial-major-mode 'fundamental-mode))
+  (setq frame-inhibit-implied-resize t)
+  (setq frame-title-format "%b [%m]")
+  (setq use-file-dialog nil)
+  (setq window-resize-pixelwise t)
+  (setq echo-keystrokes 1e-6)
+  (setq ring-bell-function #'ignore)
+  (setq visible-bell t)
+  (setq frame-resize-pixelwise t)
+  (setq scroll-margin 0)
+  (setq scroll-conservatively 1)
+  (setq scroll-preserve-screen-position t)
+  (setq auto-window-vscroll nil)
+  (setq display-line-numbers-widen t)
+  (setq locale-coding-system 'utf-8)
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1))
 
-;; scroll-bar
-(use-feature scroll-bar
-  :config
-  (scroll-bar-mode -1))
