@@ -176,8 +176,8 @@
   :defer 1
   :config
   (setq show-paren-delay 0)
- ;; (setq show-paren-when-point-in-periphery t)
-;;  (setq show-paren-when-point-inside-paren t)
+  (setq show-paren-when-point-in-periphery t)
+  (setq show-paren-when-point-inside-paren t)
   (setq blink-matching-paren nil)
   (show-paren-mode 1))
 
