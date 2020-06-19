@@ -361,6 +361,7 @@
   (interactive)
   (let ((files (mapcar 'abbreviate-file-name recentf-list)))
     (find-file (completing-read "Find recent file: " files nil t))))
+
   (selectrum-mode +1)
   :bind
   ("C-x C-r" . func/recentf-open-files))
@@ -368,9 +369,8 @@
 ;; bookmarks
 (use-package bm
   :defer 1
-  :init
-  (setq bm-restore-repository-on-load t)
   :config
+  (setq bm-restore-repository-on-load t)
   (setq bm-cycle-all-buffers t)
   (setq bm-repository-file (concat history-dir "bm-bookmarks"))
   (setq-default bm-buffer-persistence t)
@@ -439,3 +439,7 @@
   :mode
   ("\\.dat\\'"
    "\\.ledger\\'"))
+
+;; vterm
+(use-package vterm
+  )
