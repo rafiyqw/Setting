@@ -68,7 +68,8 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # more aliases
-alias ec='emacsclient -create-frame --alternate-editor=""'
+alias youtube-dl='python3 -m /home/$USER/myFiles/submodules/youtube-dl/youtube-dl'
+alias speedtest='python3 /home/$USER/myFiles/submodules/speedtest-cli/speedtest.py'
 
 # emacs vterm
 vterm_printf(){
