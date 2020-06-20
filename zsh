@@ -41,6 +41,15 @@ zstyle ':completion:*' menu select
 # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 # zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+# git support
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=\$vcs_info_msg_0_
+# PROMPT=\$vcs_info_msg_0_'%# '
+zstyle ':vcs_info:git:*' formats '%b'
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -74,3 +83,4 @@ vterm_printf(){
         printf "\e]%s\e\\" "$1"
     fi
 }
+
