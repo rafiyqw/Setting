@@ -1,3 +1,0 @@
-[submodule "clone/speedtest-cli"]
-	path = clone/speedtest-cli
-	url = https://salsa.debian.org/python-team/applications/speedtest-cli.git
