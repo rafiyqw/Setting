@@ -1,0 +1,9 @@
+[submodule "submodules/youtube-dl"]
+	path = submodules/youtube-dl
+	url = https://github.com/ytdl-org/youtube-dl
+[submodule "submodules/speedtest-cli"]
+	path = submodules/speedtest-cli
+	url = https://github.com/sivel/speedtest-cli
+[submodule "submodules/emacs"]
+	path = submodules/emacs
+	url = git://git.savannah.gnu.org/emacs.git
