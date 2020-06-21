@@ -477,5 +477,28 @@
    "\\.ledger\\'"))
 
 ;; vterm
-(use-package vterm
-  )
+(use-package vterm)
+(use-package vterm-toggle
+  :straight (:host github :repo "jixiuf/vterm-toggle")
+  :after vterm
+  :bind
+  ("<f9>" . #'vterm-toggle)
+  ("M-<f9>" . #'vterm-toggle-cd))
+  
+;; solarized-theme 2
+(use-package solarized-theme
+  :straight (:host github :repo "rafiyqw/solarized-emacs")
+  :config
+  (setq solarized-distinct-fringe-background t)
+  (setq solarized-use-variable-pitch nil)
+  (setq solarized-high-contrast-mode-line t)
+  (setq solarized-use-less-bold t)
+  (defun func/solarized-theme-switch ()
+    (interactive)
+    (if (eq (car custom-enabled-themes) 'solarized-dark-high-contrast)
+        (load-theme 'solarized-light-high-contrast)
+      (load-theme 'solarized-dark-high-contrast)))
+ 
+;;  :hook (after-init-hook . (load-theme 'solarized-dark-high-contrast))
+  :bind
+  ("<f6>" . func/solarized-theme-switch))
