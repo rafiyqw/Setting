@@ -85,9 +85,10 @@
 (setq scroll-conservatively 1)
 (setq scroll-preserve-screen-position t)
 (setq auto-window-vscroll nil)
-(setq display-line-numbers-widen t)
+(setq-default display-line-numbers-widen t)
 (setq locale-coding-system 'utf-8)
 (setq load-prefer-newer t)
+(setq x-underline-at-descent-line t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (tool-bar-mode -1)
@@ -131,7 +132,8 @@
 (use-feature tooltip
   :config
   (setq tooltip-delay 0.5)
-  (setq tooltip-use-echo-area t))
+  (setq tooltip-use-echo-area t)
+  (setq x-gtk-use-system-tooltips nil))
   
 ;; frame
 (use-feature frame
@@ -303,6 +305,7 @@
            ("Programming" (mode . prog-mode))
            ("Markdown" (mode . markdown-mode))
            ("Ledger" (mode . ledger-mode))
+           ("Terminal" (mode . vterm))
            ("Magit" (or
                     (mode . magit-blame-mode)
                     (mode . magit-cherry-mode)
@@ -422,7 +425,7 @@
   :bind
   ("<f7>" . bm-next)
   ("S-<f7>" . bm-previous)
-  ("<f8>" . bm-toggle))
+  ("M-<f7>" . bm-toggle))
 
 ;; magit
 (use-package with-editor
