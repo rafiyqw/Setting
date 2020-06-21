@@ -351,10 +351,6 @@
 
 
 ;;; Third-party Packages
-;; ace-jump
-(use-package ace-jump-mode
-  :bind ("C-." . ace-jump-mode))
-
 ;; selectrum
 (use-package selectrum
   :defer 1
