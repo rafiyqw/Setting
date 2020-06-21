@@ -442,32 +442,33 @@
   ("C-x M-g" . #'magit-dispatch)
   ("C-c M-g" . #'magit-file-dispatch))
 
-;; Solarized themes
-(use-package emacs-color-theme-solarized
-  :straight (:host github :repo "sellout/emacs-color-theme-solarized")
-  :init
-  (setq solarized-termcolor 256)
-  (setq solarized-broken-srgb t)
-  (setq solarized-contrast 'normal)
-  (defun solarized-light ()
-      (load-theme 'solarized t)
-      (set-frame-parameter nil 'background-mode 'light)
-      (enable-theme 'solarized))
+;; ;; Solarized themes
+;; (use-package emacs-color-theme-solarized
+;;   :straight (:host github :repo "sellout/emacs-color-theme-solarized")
+;;   :disabled
+;;   :init
+;;   (setq solarized-termcolor 256)
+;;   (setq solarized-broken-srgb t)
+;;   (setq solarized-contrast 'normal)
+;;   (defun solarized-light ()
+;;       (load-theme 'solarized t)
+;;       (set-frame-parameter nil 'background-mode 'light)
+;;       (enable-theme 'solarized))
 
-  (defun solarized-dark ()
-      (load-theme 'solarized t)
-      (set-frame-parameter nil 'background-mode 'dark)
-      (enable-theme 'solarized))
+;;   (defun solarized-dark ()
+;;       (load-theme 'solarized t)
+;;       (set-frame-parameter nil 'background-mode 'dark)
+;;       (enable-theme 'solarized))
 
-  (defun solarized-switch ()
-      (interactive)
-      (if (string= (frame-parameter nil 'background-mode) 'light)
-          (solarized-dark)
-        (solarized-light)))
+;;   (defun solarized-switch ()
+;;       (interactive)
+;;       (if (string= (frame-parameter nil 'background-mode) 'light)
+;;           (solarized-dark)
+;;         (solarized-light)))
 
-  (solarized-light)
-  :bind
-  ("<f6>" . #'solarized-switch))
+;;   (solarized-light)
+;;   :bind
+;;   ("<f6>" . #'solarized-switch))
 
 ;; Ledger
 (use-package ledger-mode
