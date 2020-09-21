@@ -352,53 +352,53 @@
 
 ;;; Third-party Packages
 ;; selectrum
-(use-package selectrum
-  :defer 1
-  :config
-  (defun func/recentf-open-files ()
-  "Use `completing-read' to open a recent file."
-  (interactive)
-  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
-    (find-file (completing-read "Find recent file: " files nil t))))
-
-  (defvar selectrum-swiper-history nil "Submission history for `selectrum-swiper'.")
-  (defun func/selectrum-swiper ()
-    "Search for a matching line and jump to the beginning of its text.  Obeys narrowing."
-    (interactive)
-    (let* ((selectrum-should-sort-p nil)
-           (line-choices (cl-loop
-                          with minimum-line-number = (line-number-at-pos (point-min) t)
-                          with buffer-text-lines = (split-string (buffer-string) "\n")
-                          with number-format = (format "L%%0%dd: " (length (number-to-string (length buffer-text-lines))))
-                          for txt in buffer-text-lines
-                          for num from minimum-line-number to (+ minimum-line-number
-                                                                 (1- (length buffer-text-lines)))
-                          unless (string-empty-p txt) ; Just skip empty lines.
-                          collect (concat (format number-format num) txt)))
-           ;; Get the matching line.
-           (chosen-line (completing-read "Jump to matching line: " line-choices
-                                         nil t nil 'selectrum-swiper-history))
-           ;; Stop at the ":". It is followed by one " ".
-           (line-number-prefix (seq-take-while (lambda (char)
-                                                 (not (char-equal ?: char)))
-                                               chosen-line))
-           ;; Get the corresponding line number, skipping the "L" in line-number-prefix.
-           (chosen-line-number (string-to-number (substring line-number-prefix 1)))
-           ;; Get the current line number for determining the travel distance.
-           (current-line-number (line-number-at-pos (point) t)))
-  
-      (push-mark (point) t)
-      ;; Manually edit history to remove line numbers.
-      (setcar selectrum-swiper-history (substring chosen-line
-                                                  ;; Want after line-prefix followed by ": ".
-                                                  (+ (length line-number-prefix) 2)))
-      (forward-line (- chosen-line-number current-line-number))
-      (beginning-of-line-text 1)))
-  
-  (selectrum-mode +1)
-  :bind
-  ("C-x C-r" . #'func/recentf-open-files)
-  ("M-g s" . #'func/selectrum-swiper))
+;(use-package selectrum
+;  :defer 1
+;  :config
+;  (defun func/recentf-open-files ()
+;  "Use `completing-read' to open a recent file."
+;  (interactive)
+;  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+;    (find-file (completing-read "Find recent file: " files nil t))))
+;
+;  (defvar selectrum-swiper-history nil "Submission history for `selectrum-swiper'.")
+;  (defun func/selectrum-swiper ()
+;    "Search for a matching line and jump to the beginning of its text.  Obeys narrowing."
+;    (interactive)
+;    (let* ((selectrum-should-sort-p nil)
+;           (line-choices (cl-loop
+;                          with minimum-line-number = (line-number-at-pos (point-min) t)
+;                          with buffer-text-lines = (split-string (buffer-string) "\n")
+;                          with number-format = (format "L%%0%dd: " (length (number-to-string (length buffer-text-lines))))
+;                          for txt in buffer-text-lines
+;                          for num from minimum-line-number to (+ minimum-line-number
+;                                                                 (1- (length buffer-text-lines)))
+;                          unless (string-empty-p txt) ; Just skip empty lines.
+;                          collect (concat (format number-format num) txt)))
+;           ;; Get the matching line.
+;           (chosen-line (completing-read "Jump to matching line: " line-choices
+;                                         nil t nil 'selectrum-swiper-history))
+;           ;; Stop at the ":". It is followed by one " ".
+;           (line-number-prefix (seq-take-while (lambda (char)
+;                                                 (not (char-equal ?: char)))
+;                                               chosen-line))
+;           ;; Get the corresponding line number, skipping the "L" in line-number-prefix.
+;           (chosen-line-number (string-to-number (substring line-number-prefix 1)))
+;           ;; Get the current line number for determining the travel distance.
+;           (current-line-number (line-number-at-pos (point) t)))
+;  
+;      (push-mark (point) t)
+;      ;; Manually edit history to remove line numbers.
+;      (setcar selectrum-swiper-history (substring chosen-line
+;                                                  ;; Want after line-prefix followed by ": ".
+;                                                  (+ (length line-number-prefix) 2)))
+;      (forward-line (- chosen-line-number current-line-number))
+;      (beginning-of-line-text 1)))
+;  
+;  (selectrum-mode +1)
+;  :bind
+;  ("C-x C-r" . #'func/recentf-open-files)
+;  ("M-g s" . #'func/selectrum-swiper))
 
 ;; bookmarks
 (use-package bm
@@ -476,28 +476,28 @@
    "\\.ledger\\'"))
 
 ;; vterm
-(use-package vterm)
-(use-package vterm-toggle
-  :straight (:host github :repo "jixiuf/vterm-toggle")
-  :after vterm
-  :bind
-  ("<f9>" . #'vterm-toggle)
-  ("M-<f9>" . #'vterm-toggle-cd))
+;(use-package vterm)
+;(use-package vterm-toggle
+;  :straight (:host github :repo "jixiuf/vterm-toggle")
+;  :after vterm
+;  :bind
+;  ("<f9>" . #'vterm-toggle)
+;  ("M-<f9>" . #'vterm-toggle-cd))
   
 ;; solarized-theme 2
-(use-package solarized-theme
-  :straight (:host github :repo "rafiyqw/solarized-emacs")
-  :config
-  (setq solarized-distinct-fringe-background t)
-  (setq solarized-use-variable-pitch nil)
-  (setq solarized-high-contrast-mode-line t)
-  (setq solarized-use-less-bold t)
-  (defun func/solarized-theme-switch ()
-    (interactive)
-    (if (eq (car custom-enabled-themes) 'solarized-dark-high-contrast)
-        (load-theme 'solarized-light-high-contrast)
-      (load-theme 'solarized-dark-high-contrast)))
- 
-;;  :hook (after-init-hook . (load-theme 'solarized-dark-high-contrast))
-  :bind
-  ("<f6>" . func/solarized-theme-switch))
+;(use-package solarized-theme
+;  :straight (:host github :repo "rafiyqw/solarized-emacs")
+;  :config
+;  (setq solarized-distinct-fringe-background t)
+;  (setq solarized-use-variable-pitch nil)
+;  (setq solarized-high-contrast-mode-line t)
+;  (setq solarized-use-less-bold t)
+;  (defun func/solarized-theme-switch ()
+;    (interactive)
+;    (if (eq (car custom-enabled-themes) 'solarized-dark-high-contrast)
+;        (load-theme 'solarized-light-high-contrast)
+;      (load-theme 'solarized-dark-high-contrast)))
+; 
+;;;  :hook (after-init-hook . (load-theme 'solarized-dark-high-contrast))
+;  :bind
+;  ("<f6>" . func/solarized-theme-switch))
