@@ -140,8 +140,8 @@
   :preface
   (defun func/default-font ()
     (interactive)
-    (when (member "Roboto Mono" (font-family-list))
-      (set-face-attribute 'default nil :family "Roboto Mono"))
+    (when (member "Fira Code" (font-family-list))
+      (set-face-attribute 'default nil :family "Fira Code"))
     (set-face-attribute 'default nil
                         :height 100
                         :weight 'normal))
@@ -165,8 +165,9 @@
   (setq display-line-numbers-grow-only t)
   :hook
   (prog-mode . display-line-numbers-mode)
-  :bind
-  ("<f5>" . func/cicle-line-numbers-mode))
+  ;:bind
+  ;("<f5>" . func/cicle-line-numbers-mode)
+  )
 
 ;; Highlight line
 (use-feature hl-line
@@ -346,8 +347,9 @@
           ;; try-expand-list
           ;; try-expand-line
           ))
-  :bind
-  ("M-/" . hippie-expand))
+  ;:bind
+  ;("M-/" . #'hippie-expand)
+  )
 
 
 ;;; Third-party Packages
@@ -414,21 +416,20 @@
   (kill-emacs-hook . (lambda ()
                        (bm-buffer-save-all)
                        (bm-repository-save)))
-  (after-save-hook . #'bm-buffer-save)
-  (find-file-hooks . #'bm-buffer-restore)
-  (after-revert-hook . #'bm-buffer-restore)
-  (vc-before-checkin-hook . #'bm-buffer-save)
-  :bind
-  ("<f7>" . bm-next)
-  ("S-<f7>" . bm-previous)
-  ("M-<f7>" . bm-toggle))
+  bm-repository-save(after-save-hook . #'bm-buffer-save)
+  bm-repository-save(find-file-hooks . #'bm-buffer-restore)
+  bm-repository-save(after-revert-hook . #'bm-buffer-restore)
+  bm-repository-save(vc-before-checkin-hook . #'bm-buffer-save)
+  ;:bind
+  ;("<f7>" . bm-next)
+  ;("S-<f7>" . bm-previous)
+  ;("M-<f7>" . bm-toggle)
+  )
 
 ;; magit
-(use-package with-editor
-  :after magit)
+(use-package with-editor)
 
 (use-package transient
-  :after magit
   :config
   (setq transient-levels-file (concat etc-dir "transient/levels"))
   (setq transient-values-file (concat etc-dir "transient/values"))
@@ -436,6 +437,8 @@
   (transient-bind-q-to-quit))
 
 (use-package magit
+  :after
+  with-editor transient
   :bind
   ("C-x g" . #'magit-status)
   ("C-x M-g" . #'magit-dispatch)
@@ -483,7 +486,31 @@
 ;  :bind
 ;  ("<f9>" . #'vterm-toggle)
 ;  ("M-<f9>" . #'vterm-toggle-cd))
-  
+
+;; theme
+;(use-package modus-vivendi-theme)
+(use-package modus-operandi-theme
+  :init
+  (load-theme 'modus-operandi))
+
+;;   :config
+;;   (defun modus-themes-toggle ()
+;;   "Toggle between `modus-operandi' and `modus-vivendi' themes."
+;;   (interactive)
+;;   (if (eq (car custom-enabled-themes) 'modus-operandi)
+;;       (progn
+;;         (disable-theme 'modus-operandi)
+;;         (modus-vivendi-theme-load))
+;;     (disable-theme 'modus-vivendi)
+;;     (modus-operandi-theme-load)))
+;; ;  :hook
+;; ;  (after-init-hook . #'(modus-themes-toggle))
+;;  )
+
+;; fonts
+(use-package fira-code-mode
+  :hook prog-mode)
+
 ;; solarized-theme 2
 ;(use-package solarized-theme
 ;  :straight (:host github :repo "rafiyqw/solarized-emacs")
