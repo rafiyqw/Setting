@@ -488,28 +488,28 @@
 ;  ("M-<f9>" . #'vterm-toggle-cd))
 
 ;; theme
-;(use-package modus-vivendi-theme)
 (use-package modus-operandi-theme
-  :init
-  (load-theme 'modus-operandi))
+;  :init
+;  (load-theme 'modus-operandi t))
 
-;;   :config
-;;   (defun modus-themes-toggle ()
-;;   "Toggle between `modus-operandi' and `modus-vivendi' themes."
-;;   (interactive)
-;;   (if (eq (car custom-enabled-themes) 'modus-operandi)
-;;       (progn
-;;         (disable-theme 'modus-operandi)
-;;         (modus-vivendi-theme-load))
-;;     (disable-theme 'modus-vivendi)
-;;     (modus-operandi-theme-load)))
-;; ;  :hook
-;; ;  (after-init-hook . #'(modus-themes-toggle))
-;;  )
+  :init
+  (use-package modus-vivendi-theme)
+  (defun modus-themes-toggle ()
+  "Toggle between `modus-operandi' and `modus-vivendi' themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'modus-operandi)
+      (progn
+        (disable-theme 'modus-operandi)
+        (modus-vivendi-theme-load))
+    (disable-theme 'modus-vivendi)
+    (modus-operandi-theme-load)))
+  :hook
+  (after-init-hook . #'modus-themes-toggle))
 
 ;; fonts
 (use-package fira-code-mode
-  :hook prog-mode)
+  :hook
+  (prog-mode . #'fira-code-mode))
 
 ;; solarized-theme 2
 ;(use-package solarized-theme
