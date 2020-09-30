@@ -1,10 +1,24 @@
 #!/bin/sh
 
-# emacs
-mkdir -pv /home/$USER/.config/emacs
-ln -sfiv $PWD/emacs/early-init.el /home/$USER/.emacs.d/early-init.el
-ln -sfiv $PWD/emacs/init.el /home/$USER/.emacs.d/init.el
+ln -sfv $PWD/zshrc /home/$USER/.zshrc
+ln -sfv $PWD/vimrc /home/$USER/.vimrc
+ln -sfv $PWD/tmux.conf /home/$USER/.tmux.conf
 
-ln -sfiv $PWD/zshrc /home/$USER/.zshrc
-ln -sfiv $PWD/vimrc /home/$USER/.vimrc
-ln -sfiv $PWD/tmux.conf /home/$USER/.tmux.conf
+# emacs
+rm -rf emacs/vanilla.sh
+touch emacs/vanilla.sh
+chmod +x emacs/vanilla.sh
+echo "#!/bin/sh" > emacs/vanilla.sh
+echo "rm -rf ~/.emacs.d" >> emacs/vanilla.sh
+echo "ln -sfv $PWD/emacs ~/.emacs.d" >> emacs/vanilla.sh
+
+# spacemacs
+git clone https://github.com/syl20bnr/spacemacs ~/.config/spacemacs
+
+rm -rf spacemacs/spacemacs.sh
+touch spacemacs/spacemacs.sh
+chmod +x spacemacs/spacemacs.sh
+echo "#!/bin/sh" > spacemacs/spacemacs.sh
+echo "rm -rf ~/.emacs.d" >> spacemacs/spacemacs.sh
+echo "ln -sfv ~/.config/spacemacs ~/.emacs.d" >> spacemacs/spacemacs.sh
+echo "ln -sfv $PWD/spacemacs/spacemacs-master ~/.spacemacs" >> spacemacs/spacemacs.sh
