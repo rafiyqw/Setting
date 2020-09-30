@@ -1,2 +1,3 @@
 emacs/*
 !emacs/*.el
+spacemacs/spacemacs.sh
