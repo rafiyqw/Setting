@@ -343,9 +343,8 @@
 (use-package evil-collection
   :after evil
   :ensure t
-  :config
-  (evil-collection-init))
-
+  :hook
+  (after-init-hook . evil-collection-init))
 
 
 ;; magit
