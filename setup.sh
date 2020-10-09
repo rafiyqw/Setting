@@ -16,7 +16,7 @@ echo "ln -sfv $PWD/emacs ~/.emacs.d" >> emacs/vanilla.sh
 echo "#!/bin/sh" > spacemacs/spacemacs.sh
 echo "rm -rf ~/.emacs.d" >> spacemacs/spacemacs.sh
 echo "ln -sfv ~/.config/spacemacs ~/.emacs.d" >> spacemacs/spacemacs.sh
-echo "ln -sfv $PWD/spacemacs/spacemacs-master ~/.spacemacs" >> spacemacs/spacemacs.sh
+echo "ln -sfv $PWD/spacemacs/spacemacs ~/.spacemacs" >> spacemacs/spacemacs.sh
 # spacemacs-develop
 echo "#!/bin/sh" > spacemacs/spacemacs-dev.sh
 echo "rm -rf ~/.emacs.d" >> spacemacs/spacemacs-dev.sh

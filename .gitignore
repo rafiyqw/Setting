@@ -2,3 +2,4 @@ emacs/*
 !emacs/init.el
 !emacs/early-init.el
 spacemacs/spacemacs.sh
+spacemacs/spacemacs-dev.sh
