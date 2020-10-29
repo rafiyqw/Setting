@@ -23,6 +23,6 @@ echo "rm -rf ~/.emacs.d" >> spacemacs/spacemacs-dev.sh
 echo "ln -sfv ~/.config/spacemacs-dev ~/.emacs.d" >> spacemacs/spacemacs-dev.sh
 echo "ln -sfv $PWD/spacemacs/spacemacs-dev ~/.spacemacs" >> spacemacs/spacemacs-dev.sh
 
-#git clone https://github.com/syl20bnr/spacemacs ~/.config/spacemacs
-#git clone -b develop https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-dev
+git clone https://github.com/syl20bnr/spacemacs ~/.config/spacemacs
+git clone -b develop https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-dev
 
