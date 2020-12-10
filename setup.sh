@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ln -sfv $PWD/zshrc /home/$USER/.zshrc
+# ln -sfv $PWD/zshrc /home/$USER/.zshrc
 ln -sfv $PWD/vimrc /home/$USER/.vimrc
 ln -sfv $PWD/tmux.conf /home/$USER/.tmux.conf
 
