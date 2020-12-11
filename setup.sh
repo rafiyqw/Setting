@@ -5,18 +5,25 @@ ln -sfv $PWD/vimrc /home/$USER/.vimrc
 ln -sfv $PWD/tmux.conf /home/$USER/.tmux.conf
 
 # emacs & spacemacs
-rm -rf emacs/vanilla.sh spacemacs/spacemacs.sh 
-touch emacs/vanilla.sh spacemacs/spacemacs.sh 
-chmod +x emacs/vanilla.sh spacemacs/spacemacs.sh 
-# vanilla emacs
-echo "#!/bin/sh" > emacs/vanilla.sh
-echo "rm -rf ~/.emacs.d" >> emacs/vanilla.sh
-echo "ln -sfv $PWD/emacs ~/.emacs.d" >> emacs/vanilla.sh
-# spacemacs
-echo "#!/bin/sh" > spacemacs/spacemacs.sh
-echo "rm -rf ~/.emacs.d" >> spacemacs/spacemacs.sh
-echo "ln -sfv ~/.config/spacemacs ~/.emacs.d" >> spacemacs/spacemacs.sh
-echo "ln -sfv $PWD/spacemacs/spacemacs ~/.spacemacs" >> spacemacs/spacemacs.sh
+rm -rf emacs/emacs.sh emacs/spacemacs.sh 
+touch emacs/emacs.sh emacs/spacemacs.sh 
+chmod +x emacs/emacs.sh emacs/spacemacs.sh 
 
+# emacs
+tee -a emacs/emacs.sh << END
+#!/bin/sh
+rm -rf ~/.emacs.d
+ln -sfv $PWD/emacs ~/.emacs.d
+END
+
+# spacemacs
+tee -a emacs/spacemacs.sh << END
+#!/bin/sh
+rm -rf ~/.emacs.d
+ln -sfv ~/.config/spacemacs ~/.emacs.d
+ln -sfv $PWD/emacs/spacemacs ~/.spacemacs
+END
+
+# clone spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.config/spacemacs
 
