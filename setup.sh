@@ -6,8 +6,8 @@ ln -sfv $PWD/tmux.conf /home/$USER/.tmux.conf
 
 # emacs & spacemacs
 rm -rf emacs/emacs.sh emacs/spacemacs-master.sh emacs/spacemacs-develop.sh
-touch emacs/emacs.sh emacs/spacemacs.sh emacs/spacemacs-develop.sh
-chmod +x emacs/emacs.sh emacs/spacemacs.sh emacs/spacemacs-develop.sh
+touch emacs/emacs.sh emacs/spacemacs-master.sh emacs/spacemacs-develop.sh
+chmod +x emacs/emacs.sh emacs/spacemacs-master.sh emacs/spacemacs-develop.sh
 
 # emacs
 tee -a emacs/emacs.sh << END
