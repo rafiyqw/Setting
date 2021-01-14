@@ -27,7 +27,7 @@
               (setq gc-cons-threshold default-gc-cons-threshold)))
 
 (require 'package)
-
+(package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
@@ -106,7 +106,7 @@
   (setq tooltip-use-echo-area t)
   (setq x-gtk-use-system-tooltips nil))
   
-;; frame
+;; font
 (use-package frame
   :preface
   (defun func/default-font ()
@@ -332,21 +332,6 @@
   :custom
   (completion-styles '(orderless)))
 
-;; evil
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :hook
-  (after-init-hook . evil-collection-init))
-
-
 ;; magit
 (use-package with-editor
   :after magit
@@ -392,4 +377,8 @@
       (load-theme 'modus-operandi t)))
   :hook
   (after-init-hook . modus-themes-toggle))
-  
+
+;; SML
+(use-package sml-mode
+  :ensure t
+  :commands sml-mode)
