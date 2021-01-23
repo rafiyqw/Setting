@@ -2,4 +2,5 @@
 emacs/*
 !emacs/init.el
 !emacs/early-init.el
-!emacs/spacemacs
+!emacs/spacemacs-develop.el
+!emacs/spacemacs-master.el

@@ -24,7 +24,7 @@ tee -a emacs/spacemacs-master.sh << END
 #!/bin/sh
 rm -rf ~/.emacs.d
 ln -sfv ~/.config/spacemacs-master ~/.emacs.d
-ln -sfv $PWD/emacs/spacemacs-master ~/.spacemacs
+ln -sfv $PWD/emacs/spacemacs-master.el ~/.spacemacs
 END
 
 # spacemacs-develop
@@ -32,7 +32,7 @@ tee -a emacs/spacemacs-develop.sh << END
 #!/bin/sh
 rm -rf ~/.emacs.d
 ln -sfv ~/.config/spacemacs-develop ~/.emacs.d
-ln -sfv $PWD/emacs/spacemacs-develop ~/.spacemacs
+ln -sfv $PWD/emacs/spacemacs-develop.el ~/.spacemacs
 END
 
 [ ! -d "~/.config/spacemacs-master" ] && git clone -b master https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-master || echo "directory ~/.config/spacemacs-master exist!"
