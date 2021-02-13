@@ -38,8 +38,12 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t)
      better-defaults
+     c-c++
      emacs-lisp
      finance
      git
@@ -57,10 +61,23 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom
             shell-default-shell 'vterm)
      sml
-     ;; spell-checking
-     syntax-checking
-     ;; version-control
-     treemacs
+     ;;spell-checking
+     (syntax-checking :variables
+                      syntax-checking-use-original-bitmaps t)
+     (treemacs :variables
+               ;treemacs-indentation 1
+               treemacs-use-follow-mode 'tag
+               treemacs-use-filewatch-mode t
+               treemacs-collapse-dirs 3
+               ;treemacs-use-all-the-icons-theme nil
+               )
+
+     ;;(unicode-fonts :variables
+     ;;               unicode-fonts-enable-ligatures t
+     ;;               unicode-fonts-ligature-modes '(prog-mode))
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-global-margin t)
      (vinegar :variables
               vinegar-reuse-dired-buffer t)
      )
@@ -235,7 +252,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator nil :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(spacemacs :separator nil :separator-scale 1.0)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -244,7 +261,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("IBM Plex Mono"
                                :size 10.0
                                :weight normal
                                :width normal)
@@ -358,7 +375,7 @@ It should only modify the values of Spacemacs settings."
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-active-transparency 90
+   dotspacemacs-active-transparency 100
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
@@ -399,16 +416,15 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers 
-   '(:relative nil
-     :visual nil
-     :disabled-for-modes dired-mode
-                         doc-view-mode
-                         markdown-mode
-                         org-mode
-                         pdf-view-mode
-                         text-mode
-     :size-limit-kb 1000)
+   dotspacemacs-line-numbers '(:relative nil
+                               :visual nil
+                               :disabled-for-modes dired-mode
+                                                   doc-view-mode
+                                                   markdown-mode
+                                                   org-mode
+                                                   pdf-view-mode
+                                                   text-mode
+                               :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -465,7 +481,7 @@ It should only modify the values of Spacemacs settings."
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
    ;; (default "%I@%S")
-   dotspacemacs-frame-title-format "%b@%m"
+   dotspacemacs-frame-title-format "%a@%m"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
