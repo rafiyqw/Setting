@@ -40,11 +40,11 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-sort-by-usage t)
+                      auto-completion-enable-snippets-in-popup t)
      better-defaults
      c-c++
      emacs-lisp
+     ess
      finance
      git
      helm
@@ -55,33 +55,22 @@ This function should only modify configuration layer settings."
      multiple-cursors
      (org :variables
           org-enable-sticky-header t)
+     pandoc
      python
      (shell :variables
+            shell-default-shell 'vterm
             shell-default-height 30
-            shell-default-position 'bottom
-            shell-default-shell 'vterm)
+            shell-default-position 'bottom)
      sml
-     ;;spell-checking
-     (syntax-checking :variables
-                      syntax-checking-use-original-bitmaps t)
-     (treemacs :variables
-               ;treemacs-indentation 1
-               treemacs-use-follow-mode 'tag
-               treemacs-use-filewatch-mode t
-               treemacs-collapse-dirs 3
-               ;treemacs-use-all-the-icons-theme nil
-               )
-
-     ;;(unicode-fonts :variables
-     ;;               unicode-fonts-enable-ligatures t
-     ;;               unicode-fonts-ligature-modes '(prog-mode))
+     ;; spell-checking
+     syntax-checking
+     treemacs
      (version-control :variables
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t)
      (vinegar :variables
               vinegar-reuse-dired-buffer t)
      )
-
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -201,7 +190,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'nil
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -213,7 +202,8 @@ It should only modify the values of Spacemacs settings."
    ;; pair of numbers, e.g. `(recents-by-project . (7 .  5))', where the first
    ;; number is the project limit and the second the limit on the recent files
    ;; within a project.
-   dotspacemacs-startup-lists '((recents . 5)
+   dotspacemacs-startup-lists '((TODO . 5)
+                                (recents . 5)
                                 (projects . 7))
 
    ;; True if the home buffer should respond to resize events. (default t)
@@ -252,7 +242,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator nil :separator-scale 1.0)
+   dotspacemacs-mode-line-theme '(spacemacs :separator nil :separator-scale 1.1)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -551,6 +541,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (add-hook 'c++-mode-hook 'flycheck-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
