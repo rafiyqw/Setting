@@ -3,8 +3,8 @@
 ln -sfv $PWD/zsh/zshrc ~/.zshrc
 ln -sfv $PWD/vim/vimrc ~/.vimrc
 ln -sfv $PWD/tmux/tmux.conf ~/.tmux.conf
-ln -sfv $PWD/sway ~/.config/sway
-ln -sfv $PWD/waybar ~/.config/waybar
+ln -sfv $PWD/sway ~/.config/
+ln -sfv $PWD/waybar ~/.config/
 
 # emacs & spacemacs
 rm -rf emacs/emacs.sh emacs/spacemacs-master.sh emacs/spacemacs-develop.sh

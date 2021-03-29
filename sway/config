@@ -11,70 +11,67 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+# Terminal emulator
 set $term x-terminal-emulator
-# Your preferred application launcher
+# Application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu wofi --show "drun,run" -I --exec-search --prompt "Application Launcher" --term $term | xargs swaymsg exec --
+# Wallpaper
+set $wallpaper ~/.config/sway/background
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Set wallpaper
+output * bg $wallpaper fill
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+default_border pixel 4
+hide_edge_borders smart
+font pango:"IBM Plex Sans" 10
 
 ### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
+
+# lock the screen after 300 seconds of inactivity, then turn off
+# after another 300 seconds, and turn your screens back on when resumed
+# lock the screen before your computer goes to sleep.
 
 ### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    pointer_accel 0.1
+    scroll_factor 0.5
+}
+input type:keyboard {
+    xkb_layout "gb"
+    xkb_options "caps:swapescape"
+}
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+    # Run waybar instead of swaybar
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*
-include ~/.config/sway/keybinding-default
-include ~/.config/sway/keybinding-additional
+include ~/.config/sway/keybindings-default
+include ~/.config/sway/keybindings-additional
 

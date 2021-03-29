@@ -2,7 +2,15 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-#
-# Basics:
-#
-    # Start a terminal
+# start rofi launcher
+bindsym $mod+Mod1+space exec rofi -show run
+# Brightness
+bindsym XF86MonBrightnessUp exec light -A 2
+bindsym XF86MonBrightnessDown exec light -U 2
+# Audio
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
