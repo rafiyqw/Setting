@@ -1,8 +1,8 @@
 #!/bin/sh
 
-ln -sfv $PWD/zshrc /home/$USER/.zshrc
-ln -sfv $PWD/vimrc /home/$USER/.vimrc
-ln -sfv $PWD/tmux.conf /home/$USER/.tmux.conf
+ln -sfv $PWD/zsh/zshrc ~/.zshrc
+ln -sfv $PWD/vim/vimrc ~/.vimrc
+ln -sfv $PWD/tmux/tmux.conf ~/.tmux.conf
 
 # emacs & spacemacs
 rm -rf emacs/emacs.sh emacs/spacemacs-master.sh emacs/spacemacs-develop.sh

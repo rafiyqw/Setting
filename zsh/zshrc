@@ -8,8 +8,6 @@ setopt EXTENDED_GLOB
 
 #History
 HISTFILE=/home/$USER/.cache/zsh_history
-HISTSIZE=500
-SAVEHIST=1000
 setopt SHARE_HISTORY                # share history across multiple zsh sessions
 setopt APPEND_HISTORY               # append to history
 setopt INC_APPEND_HISTORY           # adds commands as they are typed
@@ -23,17 +21,6 @@ setopt CORRECT                      # Correct commands
 setopt CORRECT_ALL                  # Correct all arguments
 
 #Completion
-# case insensitive path-completion
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
-# show descriptions when autocompleting
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' format 'Completing %d'
-# partial completion suggestions
-zstyle ':completion:*' list-suffixes true
-zstyle ':completion:*' expand prefix suffix
-# list with colors
-zstyle ':completion:*' list-colors ''x
-# load completion
 autoload -Uz compinit && compinit
 
 #Git

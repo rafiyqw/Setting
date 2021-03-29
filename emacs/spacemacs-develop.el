@@ -39,7 +39,6 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      (auto-completion :variables
-                      auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t)
      better-defaults
      c-c++
@@ -63,7 +62,9 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom)
      sml
      ;; spell-checking
-     syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-tooltips nil
+                      syntax-checking-enable-by-default nil)
      treemacs
      (version-control :variables
                       version-control-diff-tool 'diff-hl
@@ -242,7 +243,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator nil :separator-scale 1.1)
+   dotspacemacs-mode-line-theme '(spacemacs :separator nil :separator-scale 1.0)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -541,7 +542,11 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (add-hook 'c++-mode-hook 'flycheck-mode)
+  ;;(with-eval-after-load 'org
+  ;;  (org-babel-do-load-languages
+  ;;   'org-babel-load-languages
+  ;;   '((R . t)))
+  ;;  )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
