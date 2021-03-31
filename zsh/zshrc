@@ -1,5 +1,5 @@
 # Prompt
-PROMPT='%B%(?.%F{blue}%2~.%F{red}%2~)%f%(!.#.>)%b '
+PROMPT='%F{blue}%2~ %B%(?.%F{214}%(!.#.>).%F{red}%(!.#.>))%b%f '
 
 # Save history 
 HISTSIZE=10000
@@ -30,8 +30,8 @@ autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-RPROMPT=\$vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats '(%b)%r'
+RPROMPT='${vcs_info_msg_0_}'
+zstyle ':vcs_info:git:*' formats '%F{green}%b'
 zstyle ':vcs_info:*' enable git
 
 # Load aliases and shortcuts if existent.
