@@ -1,5 +1,5 @@
 # Prompt
-PROMPT='%F{blue}%2~ %B%(?.%F{214}%(!.#.>).%F{red}%(!.#.>))%b%f '
+PROMPT='%B%F{blue}%2~ %(?.%F{214}%(!.#.>).%F{red}%(!.#.>))%b%f '
 
 # Save history 
 HISTSIZE=10000
@@ -18,20 +18,32 @@ setopt share_history          # share history between different instances
 setopt correct_all            # autocorrect commands
 setopt interactive_comments   # allow comments in interactive shells
 
-#Completion
+# Completion
 autoload -Uz compinit && compinit
 zmodload -i zsh/complist
 zstyle ':completion:*' menu select      # select completions with arrow keys
-zstyle ':completion:*' group-name ''    # group results by category
+zstyle ':completion:*' list-colors ''
+
+# partial completion suggestions
+#zstyle ':completion:*' list-suffixes 
+#zstyle ':completion:*' expand prefix suffix 
+# case insensitive path-completion 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 _comp_options+=(globdots)		        # Include hidden files.
 
-#Git
+# Git
 autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
+#precmd_vcs_info() { vcs_info }
+precmd() {
+    psvar=()
+
+    vcs_info
+    [[ -n $vcs_info_msg_0_ ]] && print -v 'psvar[1]' -Pr -- "$vcs_info_msg_0_"
+}
+#precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-RPROMPT='${vcs_info_msg_0_}'
-zstyle ':vcs_info:git:*' formats '%F{green}%b'
+RPROMPT='%(1v.%F{red}${vcs_info_msg_0_}%f.%F{green}${vcs_info_msg_0_}%f)'
+zstyle ':vcs_info:git:*' formats '%b'
 zstyle ':vcs_info:*' enable git
 
 # Load aliases and shortcuts if existent.
