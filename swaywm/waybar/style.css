@@ -1,15 +1,25 @@
+/*
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+*/
+
 * {
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: Ubuntu, Helvetica, Arial, sans-serif;
     font-size: 13px;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    background-color: #333333;
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -38,31 +48,32 @@ window#waybar.chromium {
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
-    border-bottom: 3px solid transparent;
+    padding: 0 1px;
+    border: 1px solid #333333;
+    background-color: #222222;
+    color: #888888;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: inherit;
-    border-bottom: 3px solid #ffffff;
+    border: 1px solid #4c7899;
+    color: #ffffff;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    border: 1px solid #4c7899;
+    background-color: #285577;
+    color: #ffffff;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    border: 1px solid #2f343a;
+    background-color: #900000;
+    color: #ffffff;
 }
 
 #mode {
     background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
 }
 
 #clock,
@@ -79,10 +90,11 @@ window#waybar.chromium {
 #idle_inhibitor,
 #mpd {
     padding: 0 10px;
-    margin: 0 4px;
+/*    margin: 0 4px; */
     color: #ffffff;
 }
 
+/*
 #clock {
     background-color: #64727D;
 }
@@ -96,6 +108,7 @@ window#waybar.chromium {
     color: #ffffff;
     background-color: #26A65B;
 }
+*/
 
 @keyframes blink {
     to {
@@ -117,7 +130,7 @@ window#waybar.chromium {
 label:focus {
     background-color: #000000;
 }
-
+/*
 #cpu {
     background-color: #2ecc71;
     color: #000000;
@@ -200,3 +213,4 @@ label:focus {
 #mpd.paused {
     background-color: #51a37a;
 }
+*/
