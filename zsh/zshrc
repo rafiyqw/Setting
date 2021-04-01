@@ -24,10 +24,7 @@ zmodload -i zsh/complist
 zstyle ':completion:*' menu select      # select completions with arrow keys
 zstyle ':completion:*' list-colors ''
 
-# partial completion suggestions
-#zstyle ':completion:*' list-suffixes 
-#zstyle ':completion:*' expand prefix suffix 
-# case insensitive path-completion 
+# case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 _comp_options+=(globdots)		        # Include hidden files.
 
@@ -40,8 +37,8 @@ RPROMPT='${vcs_info_msg_0_}'
 zstyle ':vcs_info:*' check-for-changes false
 zstyle ':vcs_info:*' check-for-staged-changes true
 
-#zstyle ':vcs_info:git:*' formats "%b"
-zstyle ':vcs_info:git:*' formats "%s  %r/%S %b %m%u%c "
+zstyle ':vcs_info:git:*' formats "%b %m%u%c"
+#zstyle ':vcs_info:git:*' formats "%r/%S %b %m%u%c"
 zstyle ':vcs_info:*' enable git
 
 # Load aliases and shortcuts if existent.
