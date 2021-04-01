@@ -48,6 +48,7 @@ This function should only modify configuration layer settings."
      finance
      git
      helm
+     html
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      ;; lsp
