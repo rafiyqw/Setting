@@ -1,7 +1,0 @@
-mode=drun,run
-insensitive=true
-hide_scroll=true
-lines=10
-no_actions=true
-term=kitty
-width=600
