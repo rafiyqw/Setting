@@ -1,11 +1,8 @@
 #!/bin/sh
 
-ln -sfv $PWD/zsh $HOME/.config/
-ln -sfv $HOME/.config/zsh/zshrc $HOME/.zshrc
+ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
 ln -sfv $PWD/vim/vimrc ~/.vimrc
 ln -sfv $PWD/tmux/tmux.conf ~/.tmux.conf
-#ln -sfv $PWD/sway ~/.config/
-#ln -sfv $PWD/waybar ~/.config/
 
 # emacs & spacemacs
 rm -rf emacs/emacs.sh emacs/spacemacs-master.sh emacs/spacemacs-develop.sh

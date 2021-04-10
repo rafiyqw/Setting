@@ -1,3 +1,6 @@
+# user path
+PATH=$PATH:~/bin
+
 # Enable color
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
