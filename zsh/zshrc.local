@@ -1,5 +1,5 @@
 # user path
-PATH=$PATH:~/bin
+PATH=$PATH:~/.local/bin
 
 # Enable color
 alias ls='ls --color=auto'

@@ -1,8 +1,12 @@
 #!/bin/sh
 
-ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
 ln -sfv $PWD/vim/vimrc ~/.vimrc
 ln -sfv $PWD/tmux/tmux.conf ~/.tmux.conf
+
+# zsh
+wget -O $PWD/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+ln -sfv $PWD/zsh/zshrc $HOME/.zshrc
+ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
 
 # emacs & spacemacs
 rm -rf emacs/emacs.sh emacs/spacemacs-master.sh emacs/spacemacs-develop.sh
