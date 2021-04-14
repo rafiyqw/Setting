@@ -5,3 +5,4 @@ emacs/*
 !emacs/spacemacs-develop.el
 !emacs/spacemacs-master.el
 sway/background
+zsh/zshrc
