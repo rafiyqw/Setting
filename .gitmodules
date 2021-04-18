@@ -1,0 +1,6 @@
+[submodule "bin"]
+	path = bin
+	url = git@github.com:rafiyq/script.git
+[submodule "sway"]
+	path = sway
+	url = git@github.com:rafiyq/sway-config.git
