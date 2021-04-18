@@ -2,6 +2,7 @@
 
 ln -sfv $PWD/vim/vimrc ~/.vimrc
 ln -sfv $PWD/tmux/tmux.conf ~/.tmux.conf
+ln -sfv $PWD/bin ~/.local/bin
 
 # zsh
 wget -O $PWD/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
