@@ -11,3 +11,6 @@ alias egrep='egrep --color=auto'
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias wifi-on='sudo systemctl start wpa_supplicant@wlp3s0'
+alias wifi-off='sudo systemctl stop wpa_supplicant@wlp3s0'
