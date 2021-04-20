@@ -1,17 +1,26 @@
 # user path
 PATH=$PATH:~/.local/bin
 
-# Enable color
+# Color
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# List shorcut
+# List
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gcm='git commit -m'
+alias gcam='git commit -am'
+alias gd='git diff'
+alias gp='git push'
+
+# System
 alias wifi-on='sudo systemctl start wpa_supplicant@wlp3s0'
 alias wifi-off='sudo systemctl stop wpa_supplicant@wlp3s0'
 alias bt-on='sudo systemctl start bluetooth'
