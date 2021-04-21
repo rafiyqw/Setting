@@ -25,3 +25,8 @@ alias wifi-on='sudo systemctl start wpa_supplicant@wlp3s0'
 alias wifi-off='sudo systemctl stop wpa_supplicant@wlp3s0'
 alias bt-on='sudo systemctl start bluetooth'
 alias bt-off='sudo systemctl stop bluetooth'
+
+# Bluetooth
+alias connect-Fenda='bluetoothctl power on && bluetoothctl connect F0:13:C3:05:F0:3E'
+alias disconnect-Fenda='bluetoothctl connect F0:13:C3:05:F0:3E && bluetoothctl power off'
+
