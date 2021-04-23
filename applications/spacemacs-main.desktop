@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
-Name=Spacemacs
+Name=Spacemacs (Main)
 GenericName=Text Editor
 Comment=The best editor is neither Emacs nor Vim, it's Emacs and Vim!
 Keywords=Text;Editor;
-Exec=/home/rafiyq/.local/bin/start-spacemacs
+Exec=/home/rafiyq/.local/bin/start-spacemacs-master
 Icon=/home/rafiyq/.local/bin/spacemacs.svg
 Terminal=false
 X-MultipleArgs=false
