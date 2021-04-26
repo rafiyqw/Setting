@@ -3,7 +3,7 @@
 ln -sfv $PWD/vim/vimrc $HOME/.vimrc
 ln -sfv $PWD/tmux/tmux.conf $HOME/.tmux.conf
 ln -sfv $PWD/bin $HOME/.local/
-ln -sfv $PWD/applications $HOME/.local/share/
+# ln -sfv $PWD/applications $HOME/.local/share/
 
 # zsh
 [ ! -f $PWD/zsh/zshrc ] && wget -O $PWD/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
