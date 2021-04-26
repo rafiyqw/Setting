@@ -3,7 +3,12 @@
 ln -sfv $PWD/vim/vimrc $HOME/.vimrc
 ln -sfv $PWD/tmux/tmux.conf $HOME/.tmux.conf
 ln -sfv $PWD/bin $HOME/.local/
-# ln -sfv $PWD/applications $HOME/.local/share/
+
+# apps
+# ln -sfv $PWD/apps/firefox-private.desktop $HOME/.local/share/applications/
+# ln -sfv $PWD/apps/emacs.desktop $HOME/.local/share/applications/
+ln -sfv $PWD/apps/spacemacs-dev.desktop $HOME/.local/share/applications/
+# ln -sfv $PWD/apps/spacemacs-main.desktop $HOME/.local/share/applications/
 
 # zsh
 [ ! -f $PWD/zsh/zshrc ] && wget -O $PWD/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
