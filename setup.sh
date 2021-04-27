@@ -7,7 +7,7 @@ ln -sfv $PWD/bin $HOME/.local/
 # apps
 # ln -sfv $PWD/apps/firefox-private.desktop $HOME/.local/share/applications/
 # ln -sfv $PWD/apps/emacs.desktop $HOME/.local/share/applications/
-ln -sfv $PWD/apps/spacemacs-dev.desktop $HOME/.local/share/applications/
+# ln -sfv $PWD/apps/spacemacs-dev.desktop $HOME/.local/share/applications/
 # ln -sfv $PWD/apps/spacemacs-main.desktop $HOME/.local/share/applications/
 
 # zsh
