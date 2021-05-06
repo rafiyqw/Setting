@@ -17,10 +17,11 @@ ln -sfv $PWD/apps/spacemacs-term.desktop $HOME/.local/share/applications/
 [ ! -d $HOME/.config/zsh ] && mkdir $HOME/.config/zsh
 [ ! -f $HOME/.config/zsh/zshrc ] && wget -O $HOME/.config/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 [ ! -f $HOME/.config/zsh/git ] && wget -O $HOME/.config/zsh/git https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh
+[ ! -f $PWD/zsh/git-plugin.md ] && wget -0 $PWD/zsh/git-plugin.md https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/README.md
 ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
 ln -sfv $HOME/.config/zsh/zshrc $HOME/.zshrc
 
-# emacs flavor
+# emacs flavour
 tee $HOME/.local/bin/spacemacs << END
 #!/bin/sh
 rm -rf ~/.emacs.d
