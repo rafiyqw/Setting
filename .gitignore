@@ -1,8 +1,1 @@
 # ignore this file
-emacs/*
-!emacs/init.el
-!emacs/early-init.el
-!emacs/spacemacs-develop.el
-!emacs/spacemacs-master.el
-sway/background
-zsh/zshrc
