@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# config
 ln -sfv $PWD/vim/vimrc $HOME/.vimrc
 ln -sfv $PWD/tmux/tmux.conf $HOME/.tmux.conf
 ln -sfv $PWD/git $HOME/.config/
@@ -13,9 +14,11 @@ ln -sfv $PWD/apps/spacemacs.desktop $HOME/.local/share/applications/
 ln -sfv $PWD/apps/spacemacs-term.desktop $HOME/.local/share/applications/
 
 # zsh
-[ ! -f $PWD/zsh/zshrc ] && wget -O $PWD/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
-ln -sfv $PWD/zsh/zshrc $HOME/.zshrc
+[ ! -d $HOME/.config/zsh ] && mkdir $HOME/.config/zsh
+[ ! -f $HOME/.config/zsh/zshrc ] && wget -O $HOME/.config/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+[ ! -f $HOME/.config/zsh/git ] && wget -O $HOME/.config/zsh/git https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh
 ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
+ln -sfv $HOME/.config/zsh/zshrc $HOME/.zshrc
 
 # emacs flavor
 tee $HOME/.local/bin/spacemacs << END

@@ -12,14 +12,6 @@ alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Git
-alias gs='git status'
-alias ga='git add'
-alias gcm='git commit -m'
-alias gcam='git commit -am'
-alias gd='git diff'
-alias gp='git push'
-
 # System
 alias wifi-on='sudo systemctl start wpa_supplicant@wlp3s0'
 alias wifi-off='sudo systemctl stop wpa_supplicant@wlp3s0'
@@ -31,6 +23,10 @@ alias bt-off='sudo systemctl stop bluetooth'
 alias connect-Fenda='bluetoothctl power on && bluetoothctl connect F0:13:C3:05:F0:3E'
 alias disconnect-Fenda='bluetoothctl connect F0:13:C3:05:F0:3E && bluetoothctl power off'
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    exec /home/rafiyq/.local/bin/start-sway
-fi
+# External file
+[ -f $HOME/.config/zsh/git ] && source $HOME/.config/zsh/git
+
+# Install sway from console
+## if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+##     exec /home/rafiyq/.local/bin/start-sway
+## fi
