@@ -15,37 +15,29 @@ ln -sfv $PWD/bin $HOME/.local/
 ln -sfv $PWD/zsh/zshrc $HOME/.zshrc
 ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
 
-# emacs
-tee $HOME/.local/bin/start-emacs << END
+# emacs flavor
+tee $HOME/.local/bin/spacemacs << END
 #!/bin/sh
 rm -rf ~/.emacs.d
-mkdir -pv ~/.config/emacs
-ln -sfv $PWD/emacs/early-init.el ~/.config/emacs/
-ln -sfv $PWD/emacs/init.el ~/.config/emacs/
-ln -sfv ~/.config/emacs ~/.emacs.d
+case \$1 in
+    "emacs")
+        mkdir -pv ~/.config/emacs
+        ln -sfv $PWD/emacs/early-init.el ~/.config/emacs/
+        ln -sfv $PWD/emacs/init.el ~/.config/emacs/
+        ln -sfv ~/.config/emacs ~/.emacs.d
+        ;;
+    "master")
+        ln -sfv ~/.config/spacemacs-master ~/.emacs.d
+        ln -sfv $PWD/emacs/spacemacs-master.el ~/.spacemacs
+        ;;
+    "develop")
+        ln -sfv ~/.config/spacemacs-develop ~/.emacs.d
+        ln -sfv $PWD/emacs/spacemacs-develop.el ~/.spacemacs
+        ;;
+esac
 /usr/bin/emacs
 END
-chmod +x $HOME/.local/bin/start-emacs
-
-# spacemacs-master
-tee $HOME/.local/bin/start-spacemacs-master << END
-#!/bin/sh
-rm -rf ~/.emacs.d
-ln -sfv ~/.config/spacemacs-master ~/.emacs.d
-ln -sfv $PWD/emacs/spacemacs-master.el ~/.spacemacs
-/usr/bin/emacs
-END
-chmod +x $HOME/.local/bin/start-spacemacs-master
-
-# spacemacs-develop
-tee $HOME/.local/bin/start-spacemacs-develop << END
-#!/bin/sh
-rm -rf ~/.emacs.d
-ln -sfv ~/.config/spacemacs-develop ~/.emacs.d
-ln -sfv $PWD/emacs/spacemacs-develop.el ~/.spacemacs
-/usr/bin/emacs
-END
-chmod +x $HOME/.local/bin/start-spacemacs-develop
+chmod +x $HOME/.local/bin/spacemacs
 
 # clone spacemacs
 [ ! -d $HOME/.config/spacemacs-master ] && git clone -b master https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-master
