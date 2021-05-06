@@ -2,13 +2,15 @@
 
 ln -sfv $PWD/vim/vimrc $HOME/.vimrc
 ln -sfv $PWD/tmux/tmux.conf $HOME/.tmux.conf
+ln -sfv $PWD/git $HOME/.config/
 ln -sfv $PWD/bin $HOME/.local/
 
-# apps
+# Applications
 # ln -sfv $PWD/apps/firefox-private.desktop $HOME/.local/share/applications/
-# ln -sfv $PWD/apps/emacs.desktop $HOME/.local/share/applications/
-# ln -sfv $PWD/apps/spacemacs-dev.desktop $HOME/.local/share/applications/
-# ln -sfv $PWD/apps/spacemacs-main.desktop $HOME/.local/share/applications/
+ln -sfv $PWD/apps/emacs.desktop $HOME/.local/share/applications/
+ln -sfv $PWD/apps/emacs-term.desktop $HOME/.local/share/applications/
+ln -sfv $PWD/apps/spacemacs.desktop $HOME/.local/share/applications/
+ln -sfv $PWD/apps/spacemacs-term.desktop $HOME/.local/share/applications/
 
 # zsh
 [ ! -f $PWD/zsh/zshrc ] && wget -O $PWD/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
@@ -38,6 +40,8 @@ esac
 /usr/bin/emacs
 END
 chmod +x $HOME/.local/bin/spacemacs
+cp -v $HOME/.local/bin/spacemacs $HOME/.local/bin/spacemacs-term
+sed -i 's/\/usr\/bin\/emacs/\/usr\/bin\/emacs -nw/g' $HOME/.local/bin/spacemacs-term
 
 # clone spacemacs
 [ ! -d $HOME/.config/spacemacs-master ] && git clone -b master https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-master
