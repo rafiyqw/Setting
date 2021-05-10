@@ -13,6 +13,12 @@ ln -sfv $PWD/apps/emacs-term.desktop $HOME/.local/share/applications/
 ln -sfv $PWD/apps/spacemacs.desktop $HOME/.local/share/applications/
 ln -sfv $PWD/apps/spacemacs-term.desktop $HOME/.local/share/applications/
 
+# Fonts
+ln -sfv $PWD/fonts/Fira $HOME/.local/share/fonts/
+ln -sfv $PWD/fonts/NYFonts $HOME/.local/share/fonts/
+ln -sfv $PWD/fonts/SanFranciscoPro $HOME/.local/share/fonts/
+ln -sfv $PWD/fonts/SFMonoFonts $HOME/.local/share/fonts/
+
 # zsh
 [ ! -d $HOME/.config/zsh ] && mkdir $HOME/.config/zsh
 [ ! -f $HOME/.config/zsh/zshrc ] && wget -O $HOME/.config/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
