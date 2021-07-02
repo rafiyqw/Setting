@@ -9,17 +9,17 @@ ln -sfv $PWD/bin $HOME/.local/
 # Applications
 # ln -sfv $PWD/apps/firefox-private.desktop $HOME/.local/share/applications/
 ln -sfv $PWD/apps/emacs.desktop $HOME/.local/share/applications/
-ln -sfv $PWD/apps/emacs-term.desktop $HOME/.local/share/applications/
+#ln -sfv $PWD/apps/emacs-term.desktop $HOME/.local/share/applications/
 ln -sfv $PWD/apps/spacemacs.desktop $HOME/.local/share/applications/
-ln -sfv $PWD/apps/spacemacs-term.desktop $HOME/.local/share/applications/
+#ln -sfv $PWD/apps/spacemacs-term.desktop $HOME/.local/share/applications/
 
 # zsh
-[ ! -d $HOME/.config/zsh ] && mkdir $HOME/.config/zsh
-[ ! -f $HOME/.config/zsh/zshrc ] && wget -O $HOME/.config/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
-[ ! -f $HOME/.config/zsh/git ] && wget -O $HOME/.config/zsh/git https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh
-[ ! -f $PWD/zsh/git-plugin.md ] && wget -O $PWD/zsh/git-plugin.md https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/README.md
-ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
-ln -sfv $HOME/.config/zsh/zshrc $HOME/.zshrc
+#[ ! -d $HOME/.config/zsh ] && mkdir $HOME/.config/zsh
+#[ ! -f $HOME/.config/zsh/zshrc ] && wget -O $HOME/.config/zsh/zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+#[ ! -f $HOME/.config/zsh/git ] && wget -O $HOME/.config/zsh/git https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh
+#[ ! -f $PWD/zsh/git-plugin.md ] && wget -O $PWD/zsh/git-plugin.md https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/README.md
+#ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
+#ln -sfv $HOME/.config/zsh/zshrc $HOME/.zshrc
 
 # emacs flavour
 tee $HOME/.local/bin/spacemacs << END
@@ -50,3 +50,8 @@ sed -i 's/\/usr\/bin\/emacs/\/usr\/bin\/emacs -nw/g' $HOME/.local/bin/spacemacs-
 # clone spacemacs
 [ ! -d $HOME/.config/spacemacs-master ] && git clone -b master https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-master
 [ ! -d $HOME/.config/spacemacs-develop ] && git clone -b develop https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-develop
+
+# oh-my-zsh
+git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.config/oh-my-zsh
+cp ~/.config/oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+
