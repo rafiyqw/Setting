@@ -21,37 +21,3 @@ ln -sfv $PWD/apps/spacemacs.desktop $HOME/.local/share/applications/
 #ln -sfv $PWD/zsh/zshrc.local $HOME/.zshrc.local
 #ln -sfv $HOME/.config/zsh/zshrc $HOME/.zshrc
 
-# emacs flavour
-tee $HOME/.local/bin/spacemacs << END
-#!/bin/sh
-rm -rf ~/.emacs.d
-case \$1 in
-    "emacs")
-        mkdir -pv ~/.config/emacs
-        ln -sfv $PWD/emacs/early-init.el ~/.config/emacs/
-        ln -sfv $PWD/emacs/init.el ~/.config/emacs/
-        ln -sfv ~/.config/emacs ~/.emacs.d
-        ;;
-    "master")
-        ln -sfv ~/.config/spacemacs-master ~/.emacs.d
-        ln -sfv $PWD/emacs/spacemacs-master.el ~/.spacemacs
-        ;;
-    "develop")
-        ln -sfv ~/.config/spacemacs-develop ~/.emacs.d
-        ln -sfv $PWD/emacs/spacemacs-develop.el ~/.spacemacs
-        ;;
-esac
-/usr/bin/emacs
-END
-chmod +x $HOME/.local/bin/spacemacs
-cp -v $HOME/.local/bin/spacemacs $HOME/.local/bin/spacemacs-term
-sed -i 's/\/usr\/bin\/emacs/\/usr\/bin\/emacs -nw/g' $HOME/.local/bin/spacemacs-term
-
-# clone spacemacs
-[ ! -d $HOME/.config/spacemacs-master ] && git clone -b master https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-master
-[ ! -d $HOME/.config/spacemacs-develop ] && git clone -b develop https://github.com/syl20bnr/spacemacs ~/.config/spacemacs-develop
-
-# oh-my-zsh
-git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.config/oh-my-zsh
-cp ~/.config/oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
