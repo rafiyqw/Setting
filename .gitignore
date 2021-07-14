@@ -1,3 +1,4 @@
 # ignore this file
-zsh/git-plugin.md
+zsh/plugins/*
 fonts/*
+zsh/.z*
