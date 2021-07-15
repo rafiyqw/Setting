@@ -12,3 +12,5 @@ set expandtab
 set smartindent	  
 set smarttab	  
 
+set background=dark
+
