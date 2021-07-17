@@ -1,11 +1,12 @@
 #!/bin/sh
 
 # config
-ln -sfv $PWD/vim/vimrc $HOME/.vimrc
-ln -sfv $PWD/tmux/tmux.conf $HOME/.tmux.conf
-ln -sfv $PWD/git $HOME/.config/
-ln -sfv $PWD/zsh $HOME/.config/
-ln -sfv $PWD/bin $HOME/.local/
+ln -sfvi $PWD/vim/vimrc $HOME/.vimrc
+ln -sfvi $PWD/tmux/tmux.conf $HOME/.tmux.conf
+ln -sfvi $PWD/git $HOME/.config/
+ln -sfvi $PWD/zsh $HOME/.config/
+ln -sfvi $PWD/nvim $HOME/.config/
+ln -sfvi $PWD/bin $HOME/.local/
 
 # Applications
 # ln -sfv $PWD/apps/firefox-private.desktop $HOME/.local/share/applications/
