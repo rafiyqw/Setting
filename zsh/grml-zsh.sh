@@ -7,8 +7,8 @@ plugins="$HOME/.config/zsh/plugins"
 echo "export ZDOTDIR=~/.config/zsh" >> $HOME/.zprofile
 
 #[ ! -d ~/.config/zsh ] && mkdir ~/.config/zsh
-wget -O $zsh_path/.zshrc $grml_url/zsh/zshrc
-wget -O $zsh_path/.zshrc.local $grml_url/skel/.zshrc
+wget -Onc $zsh_path/.zshrc $grml_url/zsh/zshrc
+wget -Onc $zsh_path/.zshrc.local $grml_url/skel/.zshrc
 
 ## Plugins
 [ ! -d $plugins ] && mkdir $plugins
