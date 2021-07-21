@@ -8,7 +8,8 @@ local opt = vim.opt 	       -- to set options
 require('plugins')   	       -- install plugins
 
 -------------------- OPTIONS -------------------------------
-cmd 'colorscheme gruvbox'     -- Sierra colorscheme
+opt.termguicolors = true
+cmd 'colorscheme melange'     -- Sierra colorscheme
 opt.expandtab = true           -- Use spaces instead of tabs
 opt.ignorecase = true          -- Ignore case
 opt.laststatus = 1             -- show status if two windows

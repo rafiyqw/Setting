@@ -15,8 +15,14 @@ packer.startup(function(use)
   use 'neovim/nvim-lspconfig'   -- Built-in language server client.
   use 'hrsh7th/nvim-compe'	-- Auto completion Lua plugin for nvim.
   use 'L3MON4D3/LuaSnip'	-- Snippet Engine written in Lua.
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {
+    'nvim-lua/plenary.nvim'
+    }
+  }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'morhetz/gruvbox'         -- Gruvbox colorscheme
+  use 'savq/melange'
 
 end)
 
@@ -69,8 +75,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-
--------------------- Compe  --------------------------------
+-------------------- Compe & LuaSnip  --------------------------------
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -155,3 +160,65 @@ vim.api.nvim_set_keymap('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true 
 -- Map compe confirm and complete functions
 vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
+
+
+-------------------- git signs --------------------------------
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  numhl = false,
+  linehl = false,
+  keymaps = {
+    -- Default keymap options
+    noremap = true,
+
+    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+    ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+    ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+
+    -- Text objects
+    ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+    ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+  },
+  watch_index = {
+    interval = 1000,
+    follow_files = true
+  },
+  current_line_blame = false,
+  current_line_blame_delay = 1000,
+  current_line_blame_position = 'eol',
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  word_diff = false,
+  use_decoration_api = true,
+  use_internal_diff = true,  -- If luajit is present
+}
+
+-------------------- Tree-sitter  --------------------------------
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "c", "rust" },  -- list of language that will be disabled
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
